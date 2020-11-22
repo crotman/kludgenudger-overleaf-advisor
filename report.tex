@@ -82,7 +82,7 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -123,9 +123,15 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{cslreferences}%
+  {\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
+  {\par}
 
-\title{Nudging for less kludges: focusing on PMD alerts as possible kludges:
-open, fixed or new?}
+\title{Nudging for less kludges: focusing on PMD alerts as possible
+kludges: open, fixed or new?}
 \author{Bruno Crotman}
 \date{}
 
@@ -253,32 +259,32 @@ there are no braces in a statement that is inside a control statement.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{/*  1-   */}\KeywordTok{package}\ImportTok{ pack_x;}
-\CommentTok{/*  2-   */}  
-\CommentTok{/*  3-   */}\KeywordTok{import}\ImportTok{ importX.function;}
-\CommentTok{/*  4-   */}
-\CommentTok{/*  5-   */}\KeywordTok{class}\NormalTok{ ClassX }\KeywordTok{extends}\NormalTok{ ClassY }\KeywordTok{implements}\NormalTok{ InterfX \{}
-\CommentTok{/*  6-   */}    \KeywordTok{private} \DataTypeTok{long}\NormalTok{ fieldX;}
-\CommentTok{/*  7-   */}    
-\CommentTok{/*  8-   */}    \FunctionTok{ClassX}\NormalTok{(}\DataTypeTok{int}\NormalTok{ paramX, }\DataTypeTok{double}\NormalTok{ paramY) \{}
-\CommentTok{/*  9-   */}        \DataTypeTok{int}\NormalTok{ varX = }\FunctionTok{function}\NormalTok{(paramX, paramY);}
-\CommentTok{/* 10-   */}        \KeywordTok{if}\NormalTok{ (varX == }\DecValTok{0}\NormalTok{)}
-\CommentTok{/* 11-CSB*/}            \KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{ = }\DecValTok{1}\NormalTok{;}
-\CommentTok{/* 12-   */}        \KeywordTok{else}\NormalTok{\{}
-\CommentTok{/* 13-   */}            \KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{ = }\DecValTok{0}\NormalTok{;}
-\CommentTok{/* 14-   */}\NormalTok{     \}}
-\CommentTok{/* 15-   */}\NormalTok{    \}}
-\CommentTok{/* 16-   */}    \AttributeTok{@Override}
-\CommentTok{/* 17-   */}    \KeywordTok{public} \DataTypeTok{int} \FunctionTok{methodX}\NormalTok{(}\DataTypeTok{int}\NormalTok{ paramW, }\BuiltInTok{Boolean}\NormalTok{ paramZ)}
-\CommentTok{/* 18-   */}\NormalTok{    \{}
-\CommentTok{/* 19-   */}        \KeywordTok{if}\NormalTok{ (paramZ)}
-\CommentTok{/* 20-CSB*/}\NormalTok{            fieldX = paramW;}
-\CommentTok{/* 21-   */}        \KeywordTok{else}\NormalTok{\{}
-\CommentTok{/* 22-   */}\NormalTok{            fieldX = }\DecValTok{0}\NormalTok{;}
-\CommentTok{/* 23-   */}\NormalTok{     \}}
-\CommentTok{/* 24-   */}        \KeywordTok{return}\NormalTok{ paramW + }\KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{;}
-\CommentTok{/* 25-   */}\NormalTok{     \}}
-\CommentTok{/* 26-   */}\NormalTok{\}  }
+\CommentTok{/*  1{-}   */}\KeywordTok{package}\ImportTok{ pack\_x;}
+\CommentTok{/*  2{-}   */}  
+\CommentTok{/*  3{-}   */}\KeywordTok{import}\ImportTok{ importX.function;}
+\CommentTok{/*  4{-}   */}
+\CommentTok{/*  5{-}   */}\KeywordTok{class}\NormalTok{ ClassX }\KeywordTok{extends}\NormalTok{ ClassY }\KeywordTok{implements}\NormalTok{ InterfX \{}
+\CommentTok{/*  6{-}   */}    \KeywordTok{private} \DataTypeTok{long}\NormalTok{ fieldX;}
+\CommentTok{/*  7{-}   */}    
+\CommentTok{/*  8{-}   */}    \FunctionTok{ClassX}\NormalTok{(}\DataTypeTok{int}\NormalTok{ paramX, }\DataTypeTok{double}\NormalTok{ paramY) \{}
+\CommentTok{/*  9{-}   */}        \DataTypeTok{int}\NormalTok{ varX = }\FunctionTok{function}\NormalTok{(paramX, paramY);}
+\CommentTok{/* 10{-}   */}        \KeywordTok{if}\NormalTok{ (varX == }\DecValTok{0}\NormalTok{)}
+\CommentTok{/* 11{-}CSB*/}            \KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{ = }\DecValTok{1}\NormalTok{;}
+\CommentTok{/* 12{-}   */}        \KeywordTok{else}\NormalTok{\{}
+\CommentTok{/* 13{-}   */}            \KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{ = }\DecValTok{0}\NormalTok{;}
+\CommentTok{/* 14{-}   */}\NormalTok{     \}}
+\CommentTok{/* 15{-}   */}\NormalTok{    \}}
+\CommentTok{/* 16{-}   */}    \AttributeTok{@Override}
+\CommentTok{/* 17{-}   */}    \KeywordTok{public} \DataTypeTok{int} \FunctionTok{methodX}\NormalTok{(}\DataTypeTok{int}\NormalTok{ paramW, }\BuiltInTok{Boolean}\NormalTok{ paramZ)}
+\CommentTok{/* 18{-}   */}\NormalTok{    \{}
+\CommentTok{/* 19{-}   */}        \KeywordTok{if}\NormalTok{ (paramZ)}
+\CommentTok{/* 20{-}CSB*/}\NormalTok{            fieldX = paramW;}
+\CommentTok{/* 21{-}   */}        \KeywordTok{else}\NormalTok{\{}
+\CommentTok{/* 22{-}   */}\NormalTok{            fieldX = }\DecValTok{0}\NormalTok{;}
+\CommentTok{/* 23{-}   */}\NormalTok{     \}}
+\CommentTok{/* 24{-}   */}        \KeywordTok{return}\NormalTok{ paramW + }\KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{;}
+\CommentTok{/* 25{-}   */}\NormalTok{     \}}
+\CommentTok{/* 26{-}   */}\NormalTok{\}  }
 
 
 \NormalTok{CSB: ControlStatementBraces}
@@ -353,7 +359,6 @@ selected are listed below:
 \end{itemize}
 
 PMD is prepared to receive an optional XML file, along with the source
-code. This XML contain instructions about the alerts that must be
 generated by PMD. The default XML generates alerts when it finds common
 bad practices, but to create the simplified AST we use an XML file with
 instructions to generate all the nodes of the kinds we listed above. PMD
@@ -535,37 +540,37 @@ in the new version.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{/*  1-   */}\KeywordTok{package}\ImportTok{ pack_x;                                          /*  1-   */package pack_x;}                                          
-\CommentTok{/*  2-   */}                                                         \CommentTok{/*  2-   */}                                                         
-\CommentTok{/*  3-   */}\KeywordTok{import}\ImportTok{ importX.function;                                 /*  3-   */import importX.function;}                                 
-\CommentTok{/*  4-   */}                                                         \CommentTok{/*  4-   */}                                                         
-\CommentTok{/*  5-   */}\KeywordTok{class}\NormalTok{ ClassX }\KeywordTok{extends}\NormalTok{ ClassY }\KeywordTok{implements}\NormalTok{ InterfX \{         }\CommentTok{/*  5-   */}\KeywordTok{class}\NormalTok{ ClassX }\KeywordTok{extends}\NormalTok{ ClassY }\KeywordTok{implements}\NormalTok{ InterfX \{         }
-\CommentTok{/*  6-   */}    \KeywordTok{private} \DataTypeTok{long}\NormalTok{ fieldX;                                 }\CommentTok{/*  6-   */}    \KeywordTok{private} \DataTypeTok{long}\NormalTok{ fieldX;                                 }
-\CommentTok{/*  7-   */}                                                         \CommentTok{/*  7-   */}                                                         
-\CommentTok{/*  8-   */}    \FunctionTok{ClassX}\NormalTok{(}\DataTypeTok{int}\NormalTok{ paramX, }\DataTypeTok{double}\NormalTok{ paramY) \{                  }\CommentTok{/*  8-   */}    \FunctionTok{ClassX}\NormalTok{(}\DataTypeTok{int}\NormalTok{ paramX, }\DataTypeTok{double}\NormalTok{ paramY) \{                  }
-\CommentTok{/*   -   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               \CommentTok{/*  9-   */}        \DataTypeTok{int}\NormalTok{ varX = }\FunctionTok{function}\NormalTok{(paramX, paramY);                  }
-\CommentTok{/*  9-   */}        \DataTypeTok{int}\NormalTok{ varX = }\FunctionTok{function}\NormalTok{(paramX, paramY);             }\CommentTok{/*   -   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               
-\CommentTok{/* 10-   */}        \KeywordTok{if}\NormalTok{ (varX == }\DecValTok{0}\NormalTok{)                                   }\CommentTok{/* 10-   */}        \KeywordTok{if}\NormalTok{ (varX == }\DecValTok{0}\NormalTok{)                                   }
-\CommentTok{/*   -   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               \CommentTok{/* 11-   */}\NormalTok{        \{                                                }
-\CommentTok{/* 11-CSB*/}            \KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{ = }\DecValTok{1}\NormalTok{;                             }\CommentTok{/* 12-   */}            \KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{ = }\DecValTok{1}\NormalTok{;                             }
-\CommentTok{/*   -   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               \CommentTok{/* 13-   */}\NormalTok{        \}                                                            }
-\CommentTok{/* 12-   */}        \KeywordTok{else}\NormalTok{\{                                            }\CommentTok{/* 14-   */}        \KeywordTok{else}\NormalTok{\{                                            }
-\CommentTok{/* 14-   */}\NormalTok{     \}                                                        }\CommentTok{/*   -   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               
-\CommentTok{/* 13-   */}            \KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{ = }\DecValTok{0}\NormalTok{;                             }\CommentTok{/* 15-   */}            \KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{ = }\DecValTok{0}\NormalTok{;                             }
-\CommentTok{/*   -   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               \CommentTok{/* 16-   */}\NormalTok{        \}                                                }
-\CommentTok{/* 15-   */}\NormalTok{    \}                                                    }\CommentTok{/* 17-   */}\NormalTok{    \}                                                    }
-\CommentTok{/* 16-   */}    \AttributeTok{@Override}                                            \CommentTok{/* 18-   */}    \AttributeTok{@Override}                                            
-\CommentTok{/* 17-   */}    \KeywordTok{public} \DataTypeTok{int} \FunctionTok{methodX}\NormalTok{(}\DataTypeTok{int}\NormalTok{ paramW, }\BuiltInTok{Boolean}\NormalTok{ paramZ)       }\CommentTok{/* 19-   */}    \KeywordTok{public} \DataTypeTok{int} \FunctionTok{methodX}\NormalTok{(}\DataTypeTok{int}\NormalTok{ paramW, }\BuiltInTok{Boolean}\NormalTok{ paramZ)       }
-\CommentTok{/* 18-   */}\NormalTok{    \{                                                    }\CommentTok{/* 20-   */}\NormalTok{    \{                                                    }
-\CommentTok{/* 19-   */}        \KeywordTok{if}\NormalTok{ (paramZ)                                      }\CommentTok{/* 21-   */}        \KeywordTok{if}\NormalTok{ (paramZ)                                      }
-\CommentTok{/* 20-CSB*/}\NormalTok{            fieldX = paramW;                             }\CommentTok{/* 22-CSB*/}\NormalTok{            fieldX = paramW;                             }
-\CommentTok{/* 21-   */}        \KeywordTok{else}\NormalTok{\{                                            }\CommentTok{/* 23-   */}        \KeywordTok{else}\NormalTok{\{                                            }
-\CommentTok{/* 23-   */}\NormalTok{     \}                                                        }\CommentTok{/*   -   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               
-\CommentTok{/* 22-   */}\NormalTok{            fieldX = }\DecValTok{0}\NormalTok{;                                  }\CommentTok{/* 24-   */}\NormalTok{            fieldX = }\DecValTok{0}\NormalTok{;                                  }
-\CommentTok{/*   -   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               \CommentTok{/* 25-   */}\NormalTok{        \}                                                }
-\CommentTok{/* 24-   */}        \KeywordTok{return}\NormalTok{ paramW + }\KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{;                     }\CommentTok{/* 26-   */}        \KeywordTok{return}\NormalTok{ paramW + }\KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{;                     }
-\CommentTok{/* 25-   */}\NormalTok{     \}                                                   }\CommentTok{/* 27-   */}\NormalTok{     \}                                                   }
-\CommentTok{/* 26-   */}\NormalTok{\}                                                        }\CommentTok{/* 28-   */}\NormalTok{\}                                                        }
+\CommentTok{/*  1{-}   */}\KeywordTok{package}\ImportTok{ pack\_x;                                          /*  1{-}   */package pack\_x;}                                          
+\CommentTok{/*  2{-}   */}                                                         \CommentTok{/*  2{-}   */}                                                         
+\CommentTok{/*  3{-}   */}\KeywordTok{import}\ImportTok{ importX.function;                                 /*  3{-}   */import importX.function;}                                 
+\CommentTok{/*  4{-}   */}                                                         \CommentTok{/*  4{-}   */}                                                         
+\CommentTok{/*  5{-}   */}\KeywordTok{class}\NormalTok{ ClassX }\KeywordTok{extends}\NormalTok{ ClassY }\KeywordTok{implements}\NormalTok{ InterfX \{         }\CommentTok{/*  5{-}   */}\KeywordTok{class}\NormalTok{ ClassX }\KeywordTok{extends}\NormalTok{ ClassY }\KeywordTok{implements}\NormalTok{ InterfX \{         }
+\CommentTok{/*  6{-}   */}    \KeywordTok{private} \DataTypeTok{long}\NormalTok{ fieldX;                                 }\CommentTok{/*  6{-}   */}    \KeywordTok{private} \DataTypeTok{long}\NormalTok{ fieldX;                                 }
+\CommentTok{/*  7{-}   */}                                                         \CommentTok{/*  7{-}   */}                                                         
+\CommentTok{/*  8{-}   */}    \FunctionTok{ClassX}\NormalTok{(}\DataTypeTok{int}\NormalTok{ paramX, }\DataTypeTok{double}\NormalTok{ paramY) \{                  }\CommentTok{/*  8{-}   */}    \FunctionTok{ClassX}\NormalTok{(}\DataTypeTok{int}\NormalTok{ paramX, }\DataTypeTok{double}\NormalTok{ paramY) \{                  }
+\CommentTok{/*   {-}   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               \CommentTok{/*  9{-}   */}        \DataTypeTok{int}\NormalTok{ varX = }\FunctionTok{function}\NormalTok{(paramX, paramY);                  }
+\CommentTok{/*  9{-}   */}        \DataTypeTok{int}\NormalTok{ varX = }\FunctionTok{function}\NormalTok{(paramX, paramY);             }\CommentTok{/*   {-}   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               
+\CommentTok{/* 10{-}   */}        \KeywordTok{if}\NormalTok{ (varX == }\DecValTok{0}\NormalTok{)                                   }\CommentTok{/* 10{-}   */}        \KeywordTok{if}\NormalTok{ (varX == }\DecValTok{0}\NormalTok{)                                   }
+\CommentTok{/*   {-}   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               \CommentTok{/* 11{-}   */}\NormalTok{        \{                                                }
+\CommentTok{/* 11{-}CSB*/}            \KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{ = }\DecValTok{1}\NormalTok{;                             }\CommentTok{/* 12{-}   */}            \KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{ = }\DecValTok{1}\NormalTok{;                             }
+\CommentTok{/*   {-}   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               \CommentTok{/* 13{-}   */}\NormalTok{        \}                                                            }
+\CommentTok{/* 12{-}   */}        \KeywordTok{else}\NormalTok{\{                                            }\CommentTok{/* 14{-}   */}        \KeywordTok{else}\NormalTok{\{                                            }
+\CommentTok{/* 14{-}   */}\NormalTok{     \}                                                        }\CommentTok{/*   {-}   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               
+\CommentTok{/* 13{-}   */}            \KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{ = }\DecValTok{0}\NormalTok{;                             }\CommentTok{/* 15{-}   */}            \KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{ = }\DecValTok{0}\NormalTok{;                             }
+\CommentTok{/*   {-}   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               \CommentTok{/* 16{-}   */}\NormalTok{        \}                                                }
+\CommentTok{/* 15{-}   */}\NormalTok{    \}                                                    }\CommentTok{/* 17{-}   */}\NormalTok{    \}                                                    }
+\CommentTok{/* 16{-}   */}    \AttributeTok{@Override}                                            \CommentTok{/* 18{-}   */}    \AttributeTok{@Override}                                            
+\CommentTok{/* 17{-}   */}    \KeywordTok{public} \DataTypeTok{int} \FunctionTok{methodX}\NormalTok{(}\DataTypeTok{int}\NormalTok{ paramW, }\BuiltInTok{Boolean}\NormalTok{ paramZ)       }\CommentTok{/* 19{-}   */}    \KeywordTok{public} \DataTypeTok{int} \FunctionTok{methodX}\NormalTok{(}\DataTypeTok{int}\NormalTok{ paramW, }\BuiltInTok{Boolean}\NormalTok{ paramZ)       }
+\CommentTok{/* 18{-}   */}\NormalTok{    \{                                                    }\CommentTok{/* 20{-}   */}\NormalTok{    \{                                                    }
+\CommentTok{/* 19{-}   */}        \KeywordTok{if}\NormalTok{ (paramZ)                                      }\CommentTok{/* 21{-}   */}        \KeywordTok{if}\NormalTok{ (paramZ)                                      }
+\CommentTok{/* 20{-}CSB*/}\NormalTok{            fieldX = paramW;                             }\CommentTok{/* 22{-}CSB*/}\NormalTok{            fieldX = paramW;                             }
+\CommentTok{/* 21{-}   */}        \KeywordTok{else}\NormalTok{\{                                            }\CommentTok{/* 23{-}   */}        \KeywordTok{else}\NormalTok{\{                                            }
+\CommentTok{/* 23{-}   */}\NormalTok{     \}                                                        }\CommentTok{/*   {-}   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               
+\CommentTok{/* 22{-}   */}\NormalTok{            fieldX = }\DecValTok{0}\NormalTok{;                                  }\CommentTok{/* 24{-}   */}\NormalTok{            fieldX = }\DecValTok{0}\NormalTok{;                                  }
+\CommentTok{/*   {-}   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               \CommentTok{/* 25{-}   */}\NormalTok{        \}                                                }
+\CommentTok{/* 24{-}   */}        \KeywordTok{return}\NormalTok{ paramW + }\KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{;                     }\CommentTok{/* 26{-}   */}        \KeywordTok{return}\NormalTok{ paramW + }\KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{;                     }
+\CommentTok{/* 25{-}   */}\NormalTok{     \}                                                   }\CommentTok{/* 27{-}   */}\NormalTok{     \}                                                   }
+\CommentTok{/* 26{-}   */}\NormalTok{\}                                                        }\CommentTok{/* 28{-}   */}\NormalTok{\}                                                        }
 
 
 \NormalTok{CSB: ControlStatementBraces}
@@ -635,14 +640,14 @@ are presented only for reference.
 \subsection{Map new lines to old lines}\label{map}
 
 For each difference stated in the output of \textit{git diff} (the
-sections of the diff file starting with ``@@''), there is an indication
-of the number of lines removed from the old version and the number of
-lines added to the new one. The line in which the lines are removed from
-the old version and the line at which the lines are added are indicated
-too. By using this information we create a mapping from the lines in the
-old version to the equivalent lines in the new version. For the new and
-old versions presented in Section \ref{source_used}, the relation is
-shown in Table \ref{table_map}
+sections of the diff file starting with ``@@'\,'), there is an
+indication of the number of lines removed from the old version and the
+number of lines added to the new one. The line in which the lines are
+removed from the old version and the line at which the lines are added
+are indicated too. By using this information we create a mapping from
+the lines in the old version to the equivalent lines in the new version.
+For the new and old versions presented in Section \ref{source_used}, the
+relation is shown in Table \ref{table_map}
 \footnote{The mapping shown begins at line 5 in order to save space, since lines 1-4 in the old version map to lines 1-4 in the new version.}.
 
 \small
@@ -711,7 +716,7 @@ version\footnote{We suppress the end lines because for all alerts in the
 example the begin lines and the end lines are the same}. The alert that
 begins in line 20 of the old version corresponds to the alert that
 begins in line 22 of the new version. So, for this combination ``Same
-group'' feature is true. For the other combination, it is false.
+group'\,' feature is true. For the other combination, it is false.
 
 \small
 
@@ -731,11 +736,13 @@ Begin Line Old & Rule Old & \makecell[l]{Corresponding line\\ in new version} & 
 \end{tabular}}
 \end{table}
 
-\normalsize \noindent \textbf{Same Method Group ID}: a Boolean indicator
-that tells if the alerts belong to methods that are in the same group in
-the sense of the
-\texttt{Same\ Group\ ID\textquotesingle{}\textquotesingle{}\ feature\ we\ described\ above.\ First,\ we\ find\ each\ alert\textquotesingle{}s\ method\ following\ the\ path\ from\ the\ alert\textquotesingle{}s\ \ node\ to\ the\ root.\ The\ first\ node\ of\ the\ kind}method''
-or ``constructor'' found in this path defines the alert's method.
+\normalsize
+
+\noindent \textbf{Same Method Group ID}: a Boolean indicator that tells
+if the alerts belong to methods that are in the same group in the sense
+of the
+\texttt{Same\ Group\ ID\textquotesingle{}\textquotesingle{}\ feature\ we\ described\ above.\ First,\ we\ find\ each\ alert\textquotesingle{}s\ method\ following\ the\ path\ from\ the\ alert\textquotesingle{}s\ \ node\ to\ the\ root.\ The\ first\ node\ of\ the\ kind}method'\,'
+or ``constructor'\,' found in this path defines the alert's method.
 Considering the proposed example, Figure \ref{path_node_to_root_1} shows
 the AST for the first combination of alerts (see Table
 \ref{combination}).
@@ -745,8 +752,8 @@ left tree and the method for the new alert is in node 4 of the right
 tree. Table \ref{tab_same_method} shows that the begin and end lines of
 the method in the old version do not correspond to the lines in the new
 version. The correspondence uses the mapping defined in Section
-\ref{map}. For this combination, the ``Same Method Group ID'' feature is
-FALSE.
+\ref{map}. For this combination, the ``Same Method Group ID'\,' feature
+is FALSE.
 
 \% \% MARCIO: acima é mesmo ``begin and end lines of the alert'' ou
 seria ``begin and end \% lines of the methods''? \% \%Bruno: sim
@@ -785,7 +792,7 @@ for the new alert is in node 4 of the right tree. Table
 \ref{tab_same_method_2} shows that the begin and end lines of the method
 in the old version do correspond to the lines in the new version. The
 correspondence uses the map defined in Section \ref{map}. For this
-combination, the ``Same Method Group ID'' feature is TRUE.
+combination, the ``Same Method Group ID'\,' feature is TRUE.
 
 \% \% MARCIO: mesma consideração feita acima \ldots{} \% \%Bruno: sim
 
@@ -818,7 +825,7 @@ End line & 25 & 27 & 27\\
 
 \noindent \textbf{Same Method Name}: a Boolean indicator that tells if
 the alerts were found in a method with the same name. The methods for
-the alerts are found as for the ``Same Method Group ID''. However,
+the alerts are found as for the ``Same Method Group ID'\,'. However,
 instead of the corresponding lines, this feature evaluates the name of
 the methods. If the method related to the old alert and the method
 related to the new alert have the same name (even if the begin and end
@@ -841,11 +848,11 @@ version of the source code residing within the lines and columns ranges
 \noindent \textbf{Same Method Code}: for this feature we compare the
 source code of the methods related to the alerts. The methods related to
 the alerts are found the way we described for the ``Same Method Group
-ID'' above.
+ID'\,' above.
 
 \noindent \textbf{Line distance}: the distance between the
 \texttt{mean\ line\textquotesingle{}\textquotesingle{}\ (\textbackslash{}(\textbackslash{}frac\{beginline\ +\ endline\}\{2\}\textbackslash{}))\ of\ the\ new\ alert\ and\ the}corresponding
-mean line'' of the old alert. Table \ref{tab_line_distance} shows the
+mean line'\,' of the old alert. Table \ref{tab_line_distance} shows the
 line distance for the combinations of new and old alerts in the example
 we are following.
 
@@ -1113,7 +1120,24 @@ alerts and the insertion of \textit{Self-Admitted Technical Debt}
 comments in a transition between an old and a new version of source
 code.
 
-We select 39 tagged and released versions of the project ArgoUML. They
+In (Potdar and Shihab 2014), the authors discuss that the existence of
+comments that contain some specific patterns may indicate what they call
+Self-Admitted Technical Debts (SATD). In (Sierra, Shihab, and Kamei
+2019), Self-Admitted Technical Debt is defined as the event in which the
+developer consciously introduce debt. According to these two works, the
+developer acknowledges the SATD in the form of comments. In (Wehaibi
+2016) we can find some patterns based on the work of Potdar and Shihab.
+For instance, some of these patterns are ``hack'', ``retarded'',
+``remove this code'', ``treat this as a soft error'', ``kludge'',
+``fixme'', ``this isn't quite right'', ``fix this crap'', ``abandon all
+hope'' and ``kaboom''. We used all the terms used by the authors and
+added other terms that we found in the code and which we consdidered
+indicators of SATDs. To find these additional terms, we sampled 5,000
+comments and looked at them in order to recognize expressions that we
+judged as indicators of SATDs. All the regular expressions representing
+these terms are listed in Section \ref{sec_SATDs}.
+
+We select 32 tagged and released versions of the project ArgoUML. They
 were released between 2001-04-06 and 2011-12-15. For each pair of
 sequential versions, we generate the PMD Alerts and categorise the
 identified alerts as \textbf{New}, \textbf{Fixed} or \textbf{Open} using
@@ -1129,27 +1153,17 @@ amount of new alerts and comments that indicate
 
 \normalsize
 
-In Potdar and Shihab (2014), the authors discuss that the existence of
-comments that contain some specific patterns may indicate what they call
-Self-Admitted Technical Debts (SATD). In Sierra, Shihab, and Kamei
-(2019), Self-Admitted Technical Debt is defined as the event in which
-the developer consciously introduce debt. According to these two works,
-the developer acknowledges the SATD in the form of comments. In Wehaibi
-(2016) we can find some patterns based on the work of Potdar and Shihab.
-For instance, some of these patterns are ``hack'', ``retarded'',
-``remove this code'', ``treat this as a soft error'', ``kludge'',
-``fixme'', ``this isn't quite right'', ``fix this crap'', ``abandon all
-hope'' and ``kaboom''.
-
-Figure \ref{timeseries} shows in the first plot the number of alerts at
-the end of each version transition. In the second plot it shows the
+Figure \ref{timeseries} shows, in the first plot, the number of alerts
+at the end of each version transition. In the second plot it shows the
 number of new and fixed alerts. The third plot shows the number of
-comments that contain expressions listed in Wehaibi (2016). We classify
-each comment as \textbf{New}, \textbf{Fixed}, and \textbf{Open} by using
-the following procedure: if the text in the comment is the same as in
-the preceding version, the comment is classified as \textbf{Open}; the
-remaining ones are classified as \textbf{Fixed}, if they are in the old
-version and \textbf{New} if they are in the new version.
+comments that contain expressions listed in the Section \ref{sec_SATDs}.
+The fourth plot, shows the number of new and fized comments in each
+version transition. We classify each comment as \textbf{New},
+\textbf{Fixed}, and \textbf{Open} by using the following procedure: if
+the text in the comment is the same as in the preceding version, the
+comment is classified as \textbf{Open}; the remaining ones are
+classified as \textbf{Fixed}, if they are in the old version and
+\textbf{New} if they are in the new version.
 
 \% \% MARCIO: tem certeza destes números? o primeiro pico parece
 corrigir mais erros \% do que tem em estoque. O mesmo acontece para o
@@ -1174,7 +1188,7 @@ versão \%x-versão y, o número de alertas/comentários na versão y = open
 
 \begin{figure}
 \centering
-\includegraphics{report_files/figure-latex/unnamed-chunk-20-1.pdf}
+\includegraphics{report_files/figure-latex/unnamed-chunk-21-1.pdf}
 \caption{\label{timeseries}Changes, alerts and comments}
 \end{figure}
 
@@ -1197,7 +1211,7 @@ the amount of new comments.
 \[PropNewComments = \frac{NewComments}{NewComments + OldComments}\]
 
 The correlation between the proportion of new alerts and the proportion
-of new comments is 0.38.
+of new comments is 0.50.
 
 Figure \ref{scatter_prop} shows a scatter plot with the relation between
 the proportion of new alerts and the proportion of new comments. We
@@ -1205,44 +1219,53 @@ added a regression line obtained from the following model:
 
 \[ NewCommentsProportions = \alpha + \beta NewAlertsProportion \]
 
-The shaded region represents the
+The shaded region represents the confidence interval of the prediction
+of the proportion of alerts given the proportion of comments. As in any
+linear regression model, the confidence interval is wider in the
+extremes, since there is uncertainty related to the estimator of
+intercept \(\hat{\alpha}\) and also to the estimator of the slope of the
+regression line \(\hat{\beta}\).
 
 \small
 
 \begin{figure}
 \centering
-\includegraphics{report_files/figure-latex/unnamed-chunk-22-1.pdf}
+\includegraphics{report_files/figure-latex/unnamed-chunk-23-1.pdf}
 \caption{\label{scatter_prop}Proportion of new alerts x Proportion of
 new comments}
 \end{figure}
 
 \normalsize
 
+\small
+
+\normalsize
+
 We can evaluate if the positive relation we see between the new comments
 and new alert was detected by chance. Table \ref{tab_reg} shows the
-results of this regressions. The P-Value of the beta is 0.049. This
+results of this regressions. The P-Value of the beta near zero. This
 means that, if there actually is not a linear relation between new
-alerts proportion and new comments proportion, we would have
-aproximately a probability of 5\% to get a result as extreme as we got.
-The estimation for \(\beta\) is 0.44, meaning that for each additional
-1pp in the proportion of new alerts we would have 0.44 pp in the
-proportion of new comments. The \(R^2\) is 0.14, so we could say that
-14\% of the variability in the proportion of new comments could be
+alerts proportion and new comments proportion, it woukld be vwry
+unlikely to get a result as extreme as we got. The estimation for
+\(\beta\) is 0.57, meaning that for each additional 1pp in the
+proportion of new alerts we observe, on average, additional 0.53 pp in
+the proportion of new comments. The \(R^2\) is 0.25, so we could say
+that 25\% of the variability in the proportion of new comments can be
 explained by the variation in the proportion of new alerts.
 
 \small
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-23}\label{tab_reg} Regression: comments on alerts}
+\caption{\label{tab:unnamed-chunk-25}\label{tab_reg} Regression: comments on alerts}
 \centering
 \begin{tabular}[t]{l|l|l|l}
 \hline
 Characteristic & Beta & 95\% CI & p-value\\
 \hline
-(Intercept) & 0.43 & 0.21, 0.65 & <0.001\\
+(Intercept) & 0.33 & 0.13, 0.52 & 0.002\\
 \hline
-New Alerts Proportion & 0.44 & 0.00, 0.87 & 0.049\\
+New Alerts Proportion & 0.57 & 0.20, 0.95 & 0.004\\
 \hline
 \multicolumn{4}{l}{\textsuperscript{1} CI = Confidence Interval}\\
 \end{tabular}
@@ -1257,9 +1280,542 @@ maybe we will be able to get more certainty about the relation between
 alerts and SATD comments. Maybe we will be able to explain a greater
 part of the variability in the proportion of new SATD comments.
 
+\section{Appendix: expressions to find SATDs}\label{sec_SATDs}
+
+List of regular expressions used to find SATDs:
+
+\small
+
+\begin{longtable}{r|l}
+\hline
+\# & Expression\\
+\hline
+\endfirsthead
+\multicolumn{2}{@{}l}{\textit{(continued)}}\\
+\hline
+\# & Expression\\
+\hline
+\endhead
+1 & (:?doesn't|does not) take into account\\
+\hline
+2 & (:?don't|do not) understand\\
+\hline
+3 & (:?it|this) (?:is|seems) ?[[:alnum:][:space:]]* a part implementation\\
+\hline
+4 & (:?it|this) (?:is|seems) ambiguous\\
+\hline
+5 & (:?it|this) ?[[:alnum:][:space:]]* should be\\
+\hline
+6 & (:?it|this) ?[[:alnum:][:space:]]* should not\\
+\hline
+7 & (:?it|this) ?[[:alnum:][:space:]]* shouldn't\\
+\hline
+8 & (:?it|this) is never executed\\
+\hline
+9 & (:?it|this) is planned to refactor\\
+\hline
+10 & (:?it|this) should ?[[:alnum:][:space:]]* be ?[[:alnum:][:space:]]* the other way round\\
+\hline
+11 & (:?it|this) should ?[[:alnum:][:space:]]* be extended\\
+\hline
+12 & (:?it|this) should ?[[:alnum:][:space:]]* be using\\
+\hline
+13 & (:?this|the|it) ?[[:alnum:][:space:]]* contains a ?[[:alnum:][:space:]]* error\\
+\hline
+14 & (?:the|it|this) ?[[:alnum:][:space:]]* only works\\
+\hline
+15 & (?:this|it) ?.* does not work\\
+\hline
+16 & (?:this|it)?[[:alnum:][:space:]]* is in the wrong place\\
+\hline
+17 & (?:todo:|needs-more-work:)[ ]*check\\
+\hline
+18 & (?:todo:|needs-more-work:)[ ]*complete this\\
+\hline
+19 & (?:todo:|needs-more-work:)[ ]*constraints\\
+\hline
+20 & (?:todo:|needs-more-work:)[ ]*document\\
+\hline
+21 & (?:todo:|needs-more-work:)[ ]*find a way to\\
+\hline
+22 & (?:todo:|needs-more-work:)[ ]*review\\
+\hline
+23 & (?:todo:|needs-more-work:)[ ]*verify\\
+\hline
+24 & (?:todo:|needs-more-work:)[ ]*what\textbackslash{}?\\
+\hline
+25 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* algorithm\\
+\hline
+26 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* in some cases\\
+\hline
+27 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* incomplete\\
+\hline
+28 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* not ?[[:alnum:][:space:]]* completely\\
+\hline
+29 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* this does\\
+\hline
+30 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* unfinished\\
+\hline
+31 & (?:todo|needs-more-work):[ ]*add\\
+\hline
+32 & (?:todo|needs-more-work):[ ]*assumes\\
+\hline
+33 & (?:todo|needs-more-work):[ ]*constructors\\
+\hline
+34 & (?:todo|needs-more-work):[ ]*define\\
+\hline
+35 & (?:todo|needs-more-work):[ ]*disable\\
+\hline
+36 & (?:todo|needs-more-work):[ ]*fix\\
+\hline
+37 & (?:todo|needs-more-work):[ ]*handle\\
+\hline
+38 & (?:todo|needs-more-work):[ ]*improve\\
+\hline
+39 & (?:todo|needs-more-work):[ ]*make\\
+\hline
+40 & (?:todo|needs-more-work):[ ]*move\\
+\hline
+41 & (?:todo|needs-more-work):[ ]*not implemented\\
+\hline
+42 & (?:todo|needs-more-work):[ ]*provide\\
+\hline
+43 & (?:todo|needs-more-work):[ ]*remove\\
+\hline
+44 & (?:todo|needs-more-work):[ ]*replace\\
+\hline
+45 & (?:todo|needs-more-work):[ ]*should\\
+\hline
+46 & (?:todo|needs-more-work):[ ]*split\\
+\hline
+47 & (?:todo|needs-more-work):[ ]*this ?[[:alnum:][:space:]]* needs\\
+\hline
+48 & (?:todo|needs-more-work):[ ]*this ?[[:alnum:][:space:]]* should\\
+\hline
+49 & (?:todo|needs-more-work):[ ]*treat\\
+\hline
+50 & (?:todo|needs-more-work):[ ]*use\\
+\hline
+51 & (?:todo|needs-more-work):[ ]*we ?[[:alnum:][:space:]]* need\\
+\hline
+52 & (?:todo|needs-more-work):[ ]*what\textbackslash{}?\\
+\hline
+53 & (?:todo|needs-more-work):[ ]*why\\
+\hline
+54 & [do not|don't] ?[[:alnum:][:space:]]* understand the code\\
+\hline
+55 & \textbackslash{}:\textbackslash{}-\textbackslash{}(\\
+\hline
+56 & a ?[[:alnum:][:space:]]* better way of doing this would\\
+\hline
+57 & a better implementation would be\\
+\hline
+58 & abandon all hope\\
+\hline
+59 & always check for\\
+\hline
+60 & at a loss\\
+\hline
+61 & at the moment\\
+\hline
+62 & awkward\\
+\hline
+63 & bad smell\\
+\hline
+64 & bail out\\
+\hline
+65 & barf\\
+\hline
+66 & brute force\\
+\hline
+67 & buggy\\
+\hline
+68 & can we remove\\
+\hline
+69 & cause for issue\\
+\hline
+70 & causes issue\\
+\hline
+71 & causes? ?[[:alnum:][:space:]]* errors?\\
+\hline
+72 & certainly buggy\\
+\hline
+73 & check that this is correct\\
+\hline
+74 & crap\\
+\hline
+75 & crappy\\
+\hline
+76 & do not use this\\
+\hline
+77 & do we ?[[:alnum:][:space:]]* need ?[[:alnum:][:space:]]* this\\
+\hline
+78 & does not handle\\
+\hline
+79 & does not work\\
+\hline
+80 & does this help\\
+\hline
+81 & don't think so\\
+\hline
+82 & don't use this\\
+\hline
+83 & double counted\\
+\hline
+84 & doubt that this would work\\
+\hline
+85 & dummy implementation\\
+\hline
+86 & enhance so that\\
+\hline
+87 & explain that this ?[[:alnum:][:space:]]* works also\\
+\hline
+88 & fix this\\
+\hline
+89 & fix this crap\\
+\hline
+90 & fixme\\
+\hline
+91 & for a next refactoring\\
+\hline
+92 & fragile\\
+\hline
+93 & get rid of this\\
+\hline
+94 & give up and go away\\
+\hline
+95 & good enough\\
+\hline
+96 & hack\\
+\hline
+97 & hacky\\
+\hline
+98 & hang our heads in shame\\
+\hline
+99 & hardcoded\\
+\hline
+100 & hardwired\\
+\hline
+101 & hope everything will work\\
+\hline
+102 & hopefully\\
+\hline
+103 & horrible\\
+\hline
+104 & how can this possibly be\\
+\hline
+105 & how come this happens\\
+\hline
+106 & how to avoid\\
+\hline
+107 & i'd suggest that\\
+\hline
+108 & i [do not|don't] know\\
+\hline
+109 & i [do not|don't] see ?[[:alnum:][:space:]]* reason for\\
+\hline
+110 & i don't know\\
+\hline
+111 & in the future\\
+\hline
+112 & inconsistency\\
+\hline
+113 & is (:?it|this) possible\\
+\hline
+114 & is (?:it|this|the) ?[[:alnum:][:space:]]* still useful\\
+\hline
+115 & is (?:this|it) ?[[:alnum:][:space:]]* correct\\
+\hline
+116 & is ?[[:alnum:][:space:]]* the right thing here\\
+\hline
+117 & is done twice\\
+\hline
+118 & is it a bug\\
+\hline
+119 & is not so beautiful\\
+\hline
+120 & is problematic\\
+\hline
+121 & is this .*needed\\
+\hline
+122 & is this a good way ?[[:alnum:][:space:]]*\textbackslash{}?\\
+\hline
+123 & is this line really safe\\
+\hline
+124 & is this next line safe\\
+\hline
+125 & it does not work yet\\
+\hline
+126 & it doesn't work yet\\
+\hline
+127 & it is planned to refactor\\
+\hline
+128 & it is unclear to me\\
+\hline
+129 & it works,? but\\
+\hline
+130 & it would be ?[[:alnum:][:space:]]* more efficient to\\
+\hline
+131 & it would be better to\\
+\hline
+132 & just a guess\\
+\hline
+133 & just abandon it\\
+\hline
+134 & kaboom\\
+\hline
+135 & kludge\\
+\hline
+136 & less elegant ?[[:alnum:][:space:]]* that works\\
+\hline
+137 & magic numbers?\\
+\hline
+138 & make (?:it|this) configurable\\
+\hline
+139 & may cause problem\\
+\hline
+140 & nasty\\
+\hline
+141 & necessary\textbackslash{}?\\
+\hline
+142 & necessary\textbackslash{}?\\
+\hline
+143 & need to be changed\\
+\hline
+144 & need to be reviewed\\
+\hline
+145 & need to replace this\\
+\hline
+146 & needs to be ?[[:alnum:][:space:]]* after stable release\\
+\hline
+147 & needs to be fixed\\
+\hline
+148 & needs to be tidied up\\
+\hline
+149 & needs to be updated\\
+\hline
+150 & needs to be updated\\
+\hline
+151 & never get executed\\
+\hline
+152 & no point in doing this\\
+\hline
+153 & not exact, but close\\
+\hline
+154 & not strictly correct\\
+\hline
+155 & not sure ?[[:alnum:][:space:]]* (?:this|it) belongs here\\
+\hline
+156 & not sure this is ?[[:alnum:][:space:]]* right\\
+\hline
+157 & not sure whether this belongs here\\
+\hline
+158 & not the right location\\
+\hline
+159 & nuke\\
+\hline
+160 & once we go ?[[:alnum:][:space:]]* we won't need this\\
+\hline
+161 & ouch\\
+\hline
+162 & pending\\
+\hline
+163 & please explain this\\
+\hline
+164 & potential ?[[:alnum:][:space:]]* issue\\
+\hline
+165 & probably a bug\\
+\hline
+166 & problematic\\
+\hline
+167 & prolly a bug\\
+\hline
+168 & prove that this works\\
+\hline
+169 & purists would\\
+\hline
+170 & really should be\\
+\hline
+171 & really should be\\
+\hline
+172 & remove me before production\\
+\hline
+173 & remove one of them\\
+\hline
+174 & remove this before production\\
+\hline
+175 & remove this code\\
+\hline
+176 & replace by ?[[:alnum:][:space:]]* elegant\\
+\hline
+177 & retarded\\
+\hline
+178 & risk of this blowing up\\
+\hline
+179 & shall not be\\
+\hline
+180 & shame\\
+\hline
+181 & should match ?[[:alnum:][:space:]]* uml\\
+\hline
+182 & should not be using ?[[:alnum:][:space:]]* here\\
+\hline
+183 & should there really be ?[[:alnum:][:space:]]* \textbackslash{}?\\
+\hline
+184 & shouldn't we ?[[:alnum:][:space:]]* do something ?[[:alnum:][:space:]]* here\\
+\hline
+185 & silly\\
+\hline
+186 & some fatal error\\
+\hline
+187 & something ?[[:alnum:][:space:]]* gone wrong\\
+\hline
+188 & something bad happened\\
+\hline
+189 & something bad is going on\\
+\hline
+190 & something serious is wrong\\
+\hline
+191 & strange construction\\
+\hline
+192 & stupid\\
+\hline
+193 & temporary crutch\\
+\hline
+194 & temporary fix\\
+\hline
+195 & temporary solution\\
+\hline
+196 & test this\\
+\hline
+197 & that's for a next refactoring\\
+\hline
+198 & the ?[[:alnum:][:space:]]* (?:is|seems) redundant\\
+\hline
+199 & there ?[[:alnum:][:space:]]* must be a check\\
+\hline
+200 & there ?[[:alnum:][:space:]]* ought to be a check\\
+\hline
+201 & there is a problem\\
+\hline
+202 & this (?:is|seems) ?[[:alnum:][:space:]]* expensive way to\\
+\hline
+203 & this (?:is|seems) a temporary method\\
+\hline
+204 & this ?[[:alnum:][:space:]]* (?:is|seems) ?[[:alnum:][:space:]]* redundant\\
+\hline
+205 & this can be a mess\\
+\hline
+206 & this creates a dependency\\
+\hline
+207 & this does exactly the same\\
+\hline
+208 & this does not look right\\
+\hline
+209 & this doesn't look right\\
+\hline
+210 & this error needs to be\\
+\hline
+211 & this indicates a ?[[:alnum:][:space:]]* problem\\
+\hline
+212 & this is already defined\\
+\hline
+213 & this is bs\\
+\hline
+214 & this is temporary and will go away\\
+\hline
+215 & this is uncool\\
+\hline
+216 & this is wrong\\
+\hline
+217 & this isn't quite right\\
+\hline
+218 & this isn't very solid\\
+\hline
+219 & this needs work\\
+\hline
+220 & this should use ?[[:alnum:][:space:]]* instead of\\
+\hline
+221 & this will ?[[:alnum:][:space:]]* not be perfect\\
+\hline
+222 & this will fail\\
+\hline
+223 & too primitive\\
+\hline
+224 & toss it\\
+\hline
+225 & treat .*as a soft error\\
+\hline
+226 & trial and error\\
+\hline
+227 & turn off after built\\
+\hline
+228 & ugly\\
+\hline
+229 & unknown why we ever experience this\\
+\hline
+230 & untested\\
+\hline
+231 & until code is reviewed\\
+\hline
+232 & unused?\\
+\hline
+233 & wasteful\\
+\hline
+234 & we ?[[:alnum:][:space:]]* (?:don't|do not) need (?:it|this) any more\\
+\hline
+235 & we ?[[:alnum:][:space:]]* do not want\\
+\hline
+236 & we ?[[:alnum:][:space:]]* don't want\\
+\hline
+237 & we can remove\\
+\hline
+238 & we need a better\\
+\hline
+239 & we presume\\
+\hline
+240 & we should not need this\\
+\hline
+241 & we shouldn't need this\\
+\hline
+242 & what (?:shall|should) we do here\\
+\hline
+243 & what do we want to use .*\textbackslash{}?\\
+\hline
+244 & what if we need to .*\textbackslash{}?\\
+\hline
+245 & what is this trying to do\textbackslash{}?\\
+\hline
+246 & why (?:is|are) ?[[:alnum:][:space:]]* being ignored\\
+\hline
+247 & why ?[[:alnum:][:space:]]* continue here as if nothing has gone wrong\textbackslash{}?\\
+\hline
+248 & why aren't we ?[[:alnum:][:space:]]* \textbackslash{}?\\
+\hline
+249 & why is this code commented\\
+\hline
+250 & why isn't this done\\
+\hline
+251 & why there is not test\\
+\hline
+252 & workaround\\
+\hline
+253 & workaround for bug\\
+\hline
+254 & would be better here\\
+\hline
+255 & you can be unhappy now\\
+\hline
+256 & yuck\\
+\hline
+\end{longtable}
+
+\normalsize
+
 \section{References}
 
 \hypertarget{refs}{}
+\begin{cslreferences}
 \leavevmode\hypertarget{ref-Potdar2014}{}%
 Potdar, Aniket, and Emad Shihab. 2014. ``An exploratory study on
 self-admitted technical debt.'' \emph{Proceedings - 30th International
@@ -1274,5 +1830,6 @@ self-admitted technical debt.'' Elsevier Inc.
 \leavevmode\hypertarget{ref-Wehaibi2016}{}%
 Wehaibi, Sultan. 2016. ``Satd-Patterns.''
 \url{https://github.com/xsultan/satd-patterns}.
+\end{cslreferences}
 
 \end{document}
