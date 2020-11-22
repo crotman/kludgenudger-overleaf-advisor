@@ -221,9 +221,9 @@ to a new version. This algorithm is described in Section \ref{alg}. In
 Section \ref{results}, we compare the creation of new alerts with the
 insertion of Self Admitted Technical Debt (SATD) comments.
 
-\% ========================================================= \% \% PMD
-SOURCE CODE ANALYZER \% \%
-=========================================================
+% ========================================================= 
+% % PMD SOURCE CODE ANALYZER \% \%
+%=========================================================
 
 \section{The PMD Source Code Analyzer}\label{pmd}
 
@@ -407,13 +407,6 @@ statement & 24 & 9 & 24 & 36\\
 
 \normalsize
 
-\% \% MARCIO: o que significa ser ``descendente'' no parágrafo abaixo?
-\% \% Bruno: acredito que melhorei a explicação \% \% MARCIO: Não sei se
-``descendente'' seria o melhor termo, pois não há \% uma herança aqui.
-Não seria um ``componente'' ou ``parte de B''? \% \%Bruno: deixei
-descendente apenas no contexto da AST. Neste caso creio que é o termo
-correto. Posso usar subchild também, mas é um termo menos comum
-
 Looking at Table \ref{tab_nodes}, we see that there is information about
 the location of the nodes, in terms of lines and columns. We can infer
 which nodes are contained in other nodes, because we can compare the
@@ -442,9 +435,9 @@ follow three steps to recreate the AST:
   Proceed a deep-first search starting from the compilation unit node.
 \end{enumerate}
 
-\% ========================================================= \% \%
-RESEARCH QUESTIONS \% \%
-=========================================================
+% ========================================================= 
+% \%RESEARCH QUESTIONS \% \%
+%=========================================================
 
 \section{Research questions}
 \label{as_whole}
@@ -455,29 +448,17 @@ RESEARCH QUESTIONS \% \%
 
 In a given transition between an old version and a new version we want
 to identify if there was an intense introduction of PMD alerts. This
-evidence of possible kludge introduction must be normalized by the size
-of the change in source code between the two versions. We do this by
+evidence of possible kludge introduction must be normalized by the size of the change in source code between the two versions. We do this by
 following this formula:
-\%\footnote{Another possibility is to use this formula \[ \frac{\#NewAlerts - \#FixedAlerts}{Change}    \], where Change can be a measure based on the differences between the versions}:
 
-\% \% MARCIO: isto está estranho. Você só menciona o tamanho da mudança
-na nota \% de rodapé. \% \% Bruno: explicitei o que chamo de change \%
-\% MARCIO: ok, mas não seria melhor colocar tudo na mesma equação, como
-fiz \% abaixo? \% \%Bruno - OK
-
-\[ \frac{\#NewAlerts - \#FixedAlerts}{Change}    \]
-
-where
-
-\[Change = \#NewAlerts + \#FixedAlerts\]
+\begin{equation}\label{eq_prop_new_alerts}
+PropNewAlerts = \frac{NewAlerts}{NewAlerts + OldAlerts}    
+\end{equation}
 
 With these version transition measured in terms of inclusion of PMD
 alerts, we can correlate these events with some other evidence of
 kludge. In Section \ref{results}, we calculate this correlation using
 \textit{Self-Admitted Technical Debt} (SATD) comments.
-
-\% \% MARCIO: você deveria usar e referenciar a equação acima na Seção
-5. \%
 
 \vspace{16px}
 
@@ -489,17 +470,17 @@ kludges. A drop in the popularity may not be a proper evidence. The
 increment in the number of issues and bug fixed nor necessarily
 represent a degradation. Churn could be used here.
 
-\% ========================================================= \% \%
-ALGORITHMS \% \%
-\%=========================================================
+% ========================================================= 
+% \%ALGORITHMS \% \%
+%=========================================================
 
 \section{An algorithm to classify alerts}
 \label{alg}
 
-This section discusses the algorithm to classify alerts as open, fixed,
+This section discusses the algorithm proposed to classify alerts as open, fixed,
 or new. The algorithm uses the simplified AST described in Section
 \ref{ast} to create features that help to infer if two alerts in
-different versions must be considered the same. We use the term
+different versions might be considered the same. We use the term
 \textit{feature} as it is used in the field of statistical learning
 (Kuhn and Johnson, 2019). In this field, the variables that are used to
 predict the outcome of an event are called \emph{independent variables},
@@ -516,9 +497,9 @@ same, as described in Section \ref{heuristic}. Figure \ref{fig:diag}
 shows the steps of the algorithm we are describing.
 
 \begin{figure}
+  \small
   \centering
-  \smartdiagram[sequence diagram]{Get alerts for each version, Create AST for each version, Map new lines to old lines, Calculate features for each pair of alert, Decide if the alerts are the same, Classify alerts }
-\vspace{5mm}\par
+  \smartdiagram[sequence diagram]{Get alerts for each version, Create AST for each version, Map new lines to old lines, Calculate features for pairs of alert, Decide if the alerts are the same, Classify alerts}
   \caption{Steps of the algorithm to classify alerts}\label{fig:diag}
 \end{figure}
 
@@ -535,9 +516,9 @@ in the new version.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{/*  1-   */}\KeywordTok{package}\ImportTok{ pack_x;                                          /*  1-   */package pack_x;}                                          
+\CommentTok{/*  1-   */}\KeywordTok{package}\ImportTok{ pack_x;                                          \CommentTok{/*  1-   */}\KeywordTok{package} pack_x;}                                          
 \CommentTok{/*  2-   */}                                                         \CommentTok{/*  2-   */}                                                         
-\CommentTok{/*  3-   */}\KeywordTok{import}\ImportTok{ importX.function;                                 /*  3-   */import importX.function;}                                 
+\CommentTok{/*  3-   */}\KeywordTok{import}\ImportTok{ importX.function;                                 \CommentTok{/*  3-   */}\KeywordTok{import} importX.function;}                                 
 \CommentTok{/*  4-   */}                                                         \CommentTok{/*  4-   */}                                                         
 \CommentTok{/*  5-   */}\KeywordTok{class}\NormalTok{ ClassX }\KeywordTok{extends}\NormalTok{ ClassY }\KeywordTok{implements}\NormalTok{ InterfX \{         }\CommentTok{/*  5-   */}\KeywordTok{class}\NormalTok{ ClassX }\KeywordTok{extends}\NormalTok{ ClassY }\KeywordTok{implements}\NormalTok{ InterfX \{         }
 \CommentTok{/*  6-   */}    \KeywordTok{private} \DataTypeTok{long}\NormalTok{ fieldX;                                 }\CommentTok{/*  6-   */}    \KeywordTok{private} \DataTypeTok{long}\NormalTok{ fieldX;                                 }
@@ -550,7 +531,7 @@ in the new version.
 \CommentTok{/* 11-CSB*/}            \KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{ = }\DecValTok{1}\NormalTok{;                             }\CommentTok{/* 12-   */}            \KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{ = }\DecValTok{1}\NormalTok{;                             }
 \CommentTok{/*   -   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               \CommentTok{/* 13-   */}\NormalTok{        \}                                                            }
 \CommentTok{/* 12-   */}        \KeywordTok{else}\NormalTok{\{                                            }\CommentTok{/* 14-   */}        \KeywordTok{else}\NormalTok{\{                                            }
-\CommentTok{/* 14-   */}\NormalTok{     \}                                                        }\CommentTok{/*   -   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               
+\CommentTok{/* 14-   */}\NormalTok{     \}                                                   }\CommentTok{/*   -   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               
 \CommentTok{/* 13-   */}            \KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{ = }\DecValTok{0}\NormalTok{;                             }\CommentTok{/* 15-   */}            \KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{ = }\DecValTok{0}\NormalTok{;                             }
 \CommentTok{/*   -   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               \CommentTok{/* 16-   */}\NormalTok{        \}                                                }
 \CommentTok{/* 15-   */}\NormalTok{    \}                                                    }\CommentTok{/* 17-   */}\NormalTok{    \}                                                    }
@@ -560,7 +541,7 @@ in the new version.
 \CommentTok{/* 19-   */}        \KeywordTok{if}\NormalTok{ (paramZ)                                      }\CommentTok{/* 21-   */}        \KeywordTok{if}\NormalTok{ (paramZ)                                      }
 \CommentTok{/* 20-CSB*/}\NormalTok{            fieldX = paramW;                             }\CommentTok{/* 22-CSB*/}\NormalTok{            fieldX = paramW;                             }
 \CommentTok{/* 21-   */}        \KeywordTok{else}\NormalTok{\{                                            }\CommentTok{/* 23-   */}        \KeywordTok{else}\NormalTok{\{                                            }
-\CommentTok{/* 23-   */}\NormalTok{     \}                                                        }\CommentTok{/*   -   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               
+\CommentTok{/* 23-   */}\NormalTok{     \}                                                   }\CommentTok{/*   -   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               
 \CommentTok{/* 22-   */}\NormalTok{            fieldX = }\DecValTok{0}\NormalTok{;                                  }\CommentTok{/* 24-   */}\NormalTok{            fieldX = }\DecValTok{0}\NormalTok{;                                  }
 \CommentTok{/*   -   *//*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/}               \CommentTok{/* 25-   */}\NormalTok{        \}                                                }
 \CommentTok{/* 24-   */}        \KeywordTok{return}\NormalTok{ paramW + }\KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{;                     }\CommentTok{/* 26-   */}        \KeywordTok{return}\NormalTok{ paramW + }\KeywordTok{this}\NormalTok{.}\FunctionTok{fieldX}\NormalTok{;                     }
@@ -574,10 +555,10 @@ in the new version.
 
 \normalsize
 
-\subsection{Get alerts for each version}
+\subsection{Get the alerts for each version}
 
 For the new and the old versions, we run PMD using the default rule set
-as described Section \ref{history}. Table \ref{old_alerts} is created
+as described Section \ref{history}. As a result, Table \ref{old_alerts} is created
 for the old version and Table \ref{new_alerts} for the new version.
 
 \small
@@ -616,13 +597,14 @@ Kind of node & Begin line & Begin column & End line & End column\\
 
 \normalsize
 
-\subsection{Create AST for each version}
+\subsection{Create the AST for each version}
 
 For each version of the source code the algorithm creates a simplified
 AST as described in Section \ref{ast}. In Figure
 \ref{AST_compare_id_alerts} we can see the ASTs for the old and the new
-versions. In this figure, the numbers in the nodes are meaningless and
-are presented only for reference.
+versions. In this figure, the numbers in the nodes are presented only 
+for reference in following figures and tables.
+
 
 \small
 
@@ -639,11 +621,11 @@ sections of the diff file starting with ``@@''), there is an indication
 of the number of lines removed from the old version and the number of
 lines added to the new one. The line in which the lines are removed from
 the old version and the line at which the lines are added are indicated
-too. By using this information we create a mapping from the lines in the
+too. By using this information, we create a mapping from the lines in the
 old version to the equivalent lines in the new version. For the new and
 old versions presented in Section \ref{source_used}, the relation is
 shown in Table \ref{table_map}
-\footnote{The mapping shown begins at line 5 in order to save space, since lines 1-4 in the old version map to lines 1-4 in the new version.}.
+\footnote{The mapping shown begins at line 5 to save space, as lines 1-4 in the old version map to the same lines in the new one.}.
 
 \small
 
@@ -674,7 +656,7 @@ are calculated.
 
 \begin{table}[H]
 
-\caption{\label{tab:unnamed-chunk-6}Combinations of new and old alerts for which the features must be calculated \label{combination}}
+\caption{\label{tab:unnamed-chunk-6}Combinations of new and old alerts for which the features are calculated \label{combination}}
 \centering
 \begin{tabular}[t]{r|l|r|l}
 \hline
@@ -689,19 +671,24 @@ Begin Line Old & Rule Old & Begin Line New & Rule New\\
 
 \normalsize
 
-\vspace{16pt}
+%\vspace{16pt}
 
-For each alert, PMD Source Code Analyzer returns the following
-attributes:
+%For each alert, PMD Source Code Analyzer returns the following
+%attributes:
 
-\vspace{16pt}
+%\vspace{16pt}
 
 We propose the following features to calculate for each combination:
 
-\textbf{Same Rule}: a Boolean indicator that tells if the alerts are of
+\noindent \textbf{Same Rule}: a Boolean indicator that tells if the alerts are of
 the same type;
 
-\textbf{Same Group ID}: a Boolean indicator that tells if the alerts are
+%
+% MARCIO: abaixo, não seria melhor chamar de "Same Location"?
+%
+%
+
+\noindent \textbf{Same Group ID}: a Boolean indicator that tells if the alerts are
 equivalent in terms of begin line and end line, considering the mapping
 described in Section \ref{map}. For each combination, Table
 \ref{same_group} shows the begin line in the old version, the
@@ -731,25 +718,34 @@ Begin Line Old & Rule Old & \makecell[l]{Corresponding line\\ in new version} & 
 \end{tabular}}
 \end{table}
 
-\normalsize \noindent \textbf{Same Method Group ID}: a Boolean indicator
-that tells if the alerts belong to methods that are in the same group in
-the sense of the
-\texttt{Same\ Group\ ID\textquotesingle{}\textquotesingle{}\ feature\ we\ described\ above.\ First,\ we\ find\ each\ alert\textquotesingle{}s\ method\ following\ the\ path\ from\ the\ alert\textquotesingle{}s\ \ node\ to\ the\ root.\ The\ first\ node\ of\ the\ kind}method''
-or ``constructor'' found in this path defines the alert's method.
-Considering the proposed example, Figure \ref{path_node_to_root_1} shows
-the AST for the first combination of alerts (see Table
-\ref{combination}).
+\normalsize
 
-In this combination, the method of the old alert is in node 5 of the
+\noindent \textbf{Same Code}: for this feature we compare the source
+code that is contained in the nodes related to the alerts. The
+comparison is performed by lexicographically comparing the textual
+version of the source code residing within the lines and columns ranges
+(begin and end) of the alerts.
+
+%
+% MARCIO: eu chamaria de "Same Method Location"
+%
+\noindent \textbf{Same Method Group ID}: a Boolean indicator
+that tells if the alerts belong to methods that are in the same group in
+the sense of the \texttt{Same Group ID} feature we described above. First, 
+we find the method containing each alert by following the path from the 
+alert's node in the AST towards the root. The first node of the kind `method'
+or `constructor' found in this path indicates the method containing the alert.
+
+For the proposed example, Figure \ref{path_node_to_root_1} shows
+the AST for the first combination of alerts (see Table
+\ref{combination}). The method of the old alert is in node 5 of the
 left tree and the method for the new alert is in node 4 of the right
 tree. Table \ref{tab_same_method} shows that the begin and end lines of
 the method in the old version do not correspond to the lines in the new
-version. The correspondence uses the mapping defined in Section
-\ref{map}. For this combination, the ``Same Method Group ID'' feature is
+version. %The correspondence uses the mapping defined in Section
+\ref{map}. 
+Therefore, for this combination the ``Same Method Group ID'' feature is
 FALSE.
-
-\% \% MARCIO: acima é mesmo ``begin and end lines of the alert'' ou
-seria ``begin and end \% lines of the methods''? \% \%Bruno: sim
 
 \small
 
@@ -779,7 +775,7 @@ End line & 15 & 17 & 27\\
 \normalsize
 
 Figure \ref{path_node_to_root_2} shows the ASTs for the second
-combination of alerts (see Table \ref{combination}). In this combination
+combination of alerts (see Table \ref{combination}). In this combination,
 the method of the old alert is in node 3 of the left tree and the method
 for the new alert is in node 4 of the right tree. Table
 \ref{tab_same_method_2} shows that the begin and end lines of the method
@@ -787,7 +783,6 @@ in the old version do correspond to the lines in the new version. The
 correspondence uses the map defined in Section \ref{map}. For this
 combination, the ``Same Method Group ID'' feature is TRUE.
 
-\% \% MARCIO: mesma consideração feita acima \ldots{} \% \%Bruno: sim
 
 \small
 
@@ -817,37 +812,41 @@ End line & 25 & 27 & 27\\
 \normalsize
 
 \noindent \textbf{Same Method Name}: a Boolean indicator that tells if
-the alerts were found in a method with the same name. The methods for
+the alerts were found in a method with the same name. The methods containing
 the alerts are found as for the ``Same Method Group ID''. However,
 instead of the corresponding lines, this feature evaluates the name of
 the methods. If the method related to the old alert and the method
-related to the new alert have the same name (even if the begin and end
-lines are not corresponding), then this feature is set to TRUE.
-
-\noindent \textbf{Same Block}: a Boolean indicator that shows if the
-alerts belong to the same block. The blocks are defined in a similar way
-as described above, following the path from the node where each alert is
-towards the root until we find a
-\texttt{block\textquotesingle{}\textquotesingle{},}method'`, or
-\texttt{constructor\textquotesingle{}\textquotesingle{}\ node.\ Then,\ the\ begin\ and\ end\ lines\ \ of\ the\ old\ alert\ and\ the\ corresponding\ lines\ in\ the\ new\ version\ are\ compared\ with\ the\ begin\ and\ end\ lines\ of\ the\ new\ alert,\ as\ for\ the}Same
-Method Group ID''.
-
-\noindent \textbf{Same Code}: for this feature we compare the source
-code that is contained in the nodes related to the alerts. The
-comparison is performed by lexicographically comparing the textual
-version of the source code residing within the lines and columns ranges
-(begin and end) of the alerts.
+related to the new alert have the same name, this feature is set to TRUE.
 
 \noindent \textbf{Same Method Code}: for this feature we compare the
 source code of the methods related to the alerts. The methods related to
 the alerts are found the way we described for the ``Same Method Group
 ID'' above.
 
+%
+% MARCIO: eu chamaria de "Same Block Location"
+%
+\noindent \textbf{Same Block}: a Boolean indicator that shows if the
+alerts belong to the same block. The blocks are defined in a similar way
+as described above, following the path from the node where each alert is
+towards the root until we find a `block, `method', or `constructor' node.
+Then, the begin and end lines of the old alert and the corresponding lines
+in the new version are compared with the begin and end lines of the new
+alert, as for the ``Same Method Group ID'' feature.
+
 \noindent \textbf{Line distance}: the distance between the
-\texttt{mean\ line\textquotesingle{}\textquotesingle{}\ (\textbackslash{}(\textbackslash{}frac\{beginline\ +\ endline\}\{2\}\textbackslash{}))\ of\ the\ new\ alert\ and\ the}corresponding
-mean line'' of the old alert. Table \ref{tab_line_distance} shows the
-line distance for the combinations of new and old alerts in the example
-we are following.
+mean line\ ($\frac{beginline + endline}{2}$) of the new alert 
+and the corresponding mean line of the old alert. Table 
+\ref{tab_line_distance} shows the line distance for the 
+combinations of new and old alerts in the example we are 
+following.
+
+%
+% MARCIO: até aqui, apenas mudei a ordem de algumas features e propus nomes um
+% pouco diferentes e, na minha opinião, mais simples. Se estiver de acordo, por
+% favor mude os nomes e atualize a ordem nas tabelas a seguir e os nomes nas 
+% tabelas e regras.
+%
 
 \small
 
@@ -896,7 +895,7 @@ Alert combination & Feature & Value\\
 
 \rowcolor{gray!6}   & Same Method Code & FALSE\\
 
-\multirow[t]{-8}{*}{\raggedright\arraybackslash Line (Old version):11, Line (New version):22} & Line Distance & 10.00\\
+\multirow[t]{-8}{*}{\raggedright\arraybackslash Line (old): 11, Line (new): 22} & Line Distance & 10.00\\
 \cline{1-3}
  & Same Rule & TRUE\\
 
@@ -912,7 +911,7 @@ Alert combination & Feature & Value\\
 
 \rowcolor{gray!6}   & Same Method Code & TRUE\\
 
-\multirow[t]{-8}{*}{\raggedright\arraybackslash Line (Old version):20, Line (New version):22} & Line Distance & 0.00\\
+\multirow[t]{-8}{*}{\raggedright\arraybackslash Line (old): 20, Line (new): 22} & Line Distance & 0.00\\
 \hline
 \end{tabular}
 \end{table}
@@ -923,12 +922,10 @@ Alert combination & Feature & Value\\
 
 With the features at hand, we must decide if each combination of old and
 new alerts refers to the same alert. As a starting point, we are using a
-rule of thumb (a manually-devised heuristic) to make this decision. A
-new and an old alerts are declared the same if any of the following
-rules apply.
+set of manually-devised heuristics to make this decision. A new and an old
+alerts are declared the same if any of the three rules below apply.
 
-All the Boolean features are TRUE and \textit{Line Distance} is equal to
-0;
+\textbf{Rule 1}: All Boolean features are TRUE and \textit{Line Distance} is equal to 0.
 
 \scriptsize
 
@@ -941,25 +938,28 @@ SameMethodCode \land LineDistance = 0) \Rightarrow SameAlert
 
 \normalsize
 
-If \textit{Same Method Code} is TRUE, then we consider it is the same
-method, even if the name or the method is not the same. But if the
-method code is the same, then the alert code and the kind of the alert
-must be the same;
+\textbf{Rule 2}: If ``Same Method Code'' is TRUE, we consider it is the same
+method, even if the name changes over the version. Thus, if the method code 
+is the same, the alert code is the same and the kind of the alert is the same,
+we consider that the two alerts under analysis are the same.
 
-\% \% MARCIO: esta regra está meio estranha. Para que usa o Same Method
-Group ID se está \% usando a comparação de código aqui? \% \%Bruno: nao
-estou Method Group ID, mas o código do Method. Está confuso usar as
-palavras Code e ID? Posso usar SourceCode pra deixar claro que não é um
-código numérico identificador mas sim o código-fonte \% \scriptsize \[
+% MARCIO: esta regra está meio estranha. Para que usa o Same MethodGroup ID se está \% usando a comparação de código aqui? % 
+
+%Bruno: nao estou Method Group ID, mas o código do Method. Está confuso usar as palavras Code e ID? Posso usar SourceCode pra deixar claro que não é um código numérico identificador mas sim o código-fonte \% 
+
+% MARCIO: veja se as mudanças de nome que propus ajudam. Não gosto do uso de ID nos nomes das features. Mas surgiu uma nova dúvida, se o  método que contém o alerta tem o mesmo código nnas duas versões, é possível que o código do alerta mude? Ou seja, se Same Method Code = TRUE, SameCode pode ser FALSE?
+
+
+\scriptsize \[
 \begin{aligned}
-(SameRule \land SameCode \land SameMethodCode \Rightarrow SameAlert
+(SameRule \land SameCode \land SameMethodCode) \Rightarrow SameAlert
 \end{aligned}\]
 
 \normalsize
 
-If the kind of alert is the same, and at least one of the features about
+\textbf{Rule 3}: If the kind of alert is the same, and at least one of the features about
 the method is TRUE, we consider that the alerts are the same if the line
-distance must be less then 5 lines;
+distance is less than 5 lines.
 
 \scriptsize
 
@@ -972,17 +972,16 @@ LineDistance < 5) \Rightarrow SameAlert
 
 \normalsize
 
-\% \% MARCIO: o que significa ``we must have evidence that the method is
-the same''? \% \% MARCIO: ``Same Group ID''=TRUE não implica que Line
-Distance = 0? Se for o caso, \% as duas últimas regras são redundantes.
-\% \%Sim, posso juntar. Tava pensando em dar um peso diferente quando eu
-tivesse mais certeza, mas desisti
-
 Table \ref{table_features_with_decision} shows the resulting features of
 the two combinations of alerts in the example we are following and the
 final decision if they are the same alert.
 
 \small
+
+%
+% MARCIO: acho que a tabela abaixo é desnecessária. Faça referência à Tabela 10 e 
+% o resultado para as duas combinações no corpo do texto.
+%
 
 \begin{table}[H]
 
@@ -1031,14 +1030,20 @@ Alert combination & Feature & Featre value & Same alert\\
 
 \subsection{Classify alerts}\label{heuristic}
 
-Finally we can decide if the alerts in the old version are open or fixed
+Finally, we can decide if the alerts in the old version are open or fixed
 and if the alerts in the new version are open or new. In our example, we
 have two alerts in the old version and they are combined with the alert
 in the new version. Table \ref{tab_categorizing_old} shows the two old
 alerts combined with the new alert. The first old alert is not
-classified as the same as any of new alerts, so is marked as
+classified as the same as any of the new alerts, so is marked as
 \textbf{Open}. The second alert is classified as the same as the new
 alert, so is declared \textbf{Fixed}.
+
+%
+% MARCIO: não deveria ser o contrário? Como o primeiro não casou com ninguém, ele deveria ser
+% considerado resolvido, dado que não existe na nova versão. O segundo, que casou, deveria ser
+% considerado Open. Não é isto?
+%
 
 \small
 
@@ -1058,6 +1063,11 @@ alert, so is declared \textbf{Fixed}.
 \end{table}
 
 \normalsize
+
+
+%
+% MARCIO: precisa fazer o caminho de volta? Não basta fazer dos antigos para os novos?
+%
 
 Table \ref{tab_categorizing_new} shows the new alert combined with the
 two old alerts. The new alert is classified as the same as one of the
@@ -1081,6 +1091,10 @@ old alerts, so is declared Open.
 \end{table}
 
 \normalsize
+
+%
+% MARCIO: fiquei confuso ... não deveria ter duas linhas apenas?
+%
 
 Table \ref{tab_summary_categories} shows the final categories for the
 two alerts in the old version and the alert in the new version.
@@ -1113,58 +1127,45 @@ alerts and the insertion of \textit{Self-Admitted Technical Debt}
 comments in a transition between an old and a new version of source
 code.
 
-We select 39 tagged and released versions of the project ArgoUML. They
-were released between 2001-04-06 and 2011-12-15. For each pair of
-sequential versions, we generate the PMD Alerts and categorise the
-identified alerts as \textbf{New}, \textbf{Fixed} or \textbf{Open} using
+We select 39 tagged and released versions of the ArgoUML project released 
+between April, 2001 and December, 2011-12-15. For each pair of
+versions, we generate the PMD alerts and classify these
+alerts as \textbf{New}, \textbf{Fixed} or \textbf{Open} using
 the algorithm described in Section \ref{alg}. We want to understand if
 the number of new alerts, normalized by the magnitude of the change
 between two versions, is a good proxy for the amount of kludge
-introduced in the code base. A first approach we try in this preliminary
-investigation is to measure the correlation between the normalized
-amount of new alerts and comments that indicate
-\textit{Self-Admitted Technical Debt}.
+introduced in the code base. In this preliminary investigation, 
+we measure the correlation between the normalized amount of new alerts
+and the number of comments indicating \textit{Self-Admitted Technical Debt}.
 
-\small
+Potdar and Shihab (2014) discuss that the existence of
+comments that contain specific patterns may indicate what they call
+\textit{Self-Admitted Technical Debts} (SATD). In Sierra, Shihab, and Kamei
+(2019), SADT is defined as the event in which the developer consciously 
+introduce debt and acknowledges the SATD in the form of comments. In 
+Wehaibi (2016), we can find patterns based on the work of Potdar and Shihab. 
+For instance, some of these patterns are ``hack'', ``retarded'', 
+``remove this code'', ``treat this as a soft error'', ``kludge'', 
+``fixme'', ``this isn't quite right'', ``fix this crap'', 
+``abandon all hope'', and ``kaboom''.
 
-\normalsize
-
-In Potdar and Shihab (2014), the authors discuss that the existence of
-comments that contain some specific patterns may indicate what they call
-Self-Admitted Technical Debts (SATD). In Sierra, Shihab, and Kamei
-(2019), Self-Admitted Technical Debt is defined as the event in which
-the developer consciously introduce debt. According to these two works,
-the developer acknowledges the SATD in the form of comments. In Wehaibi
-(2016) we can find some patterns based on the work of Potdar and Shihab.
-For instance, some of these patterns are ``hack'', ``retarded'',
-``remove this code'', ``treat this as a soft error'', ``kludge'',
-``fixme'', ``this isn't quite right'', ``fix this crap'', ``abandon all
-hope'' and ``kaboom''.
-
-Figure \ref{timeseries} shows in the first plot the number of alerts at
-the end of each version transition. In the second plot it shows the
+The first plot in Figure \ref{timeseries} shows the number of alerts in
+the new version for each transition. In the second plot, it shows the
 number of new and fixed alerts. The third plot shows the number of
-comments that contain expressions listed in Wehaibi (2016). We classify
+comments containing expressions listed in Wehaibi (2016). We classify
 each comment as \textbf{New}, \textbf{Fixed}, and \textbf{Open} by using
 the following procedure: if the text in the comment is the same as in
-the preceding version, the comment is classified as \textbf{Open}; the
-remaining ones are classified as \textbf{Fixed}, if they are in the old
-version and \textbf{New} if they are in the new version.
+the preceding version, it is \textbf{Open}; the remaining ones are 
+classified as \textbf{Fixed}, if they are in the old version, and 
+\textbf{New} if they are in the new version.
 
-\% \% MARCIO: tem certeza destes números? o primeiro pico parece
-corrigir mais erros \% do que tem em estoque. O mesmo acontece para o
-segundo pico. Dá uma conferida \% se em algum momento Fixed
-\textgreater{} Accum(Open+New) \ldots{} Também acho que vale a pena \%
-mostrar o número de opens. \% \% MARCIO: além disso, falta um pedaço de
-linha vermelha no segundo gráfico. Pq? \% \% Bruno: não tinha estoque
-aí, era sempre transição. existem versões pra trás. \%Faltavam uns itens
-de arquivos que não existima dos dois lados. Acho que os \%gráficos
-\%estão mais \%claros agora que botei o estoque \%
+% MARCIO: tem certeza destes números? o primeiro pico parece corrigir mais erros \% do que tem em estoque. O mesmo acontece para o segundo pico. Dá uma conferida \% se em algum momento Fixed \textgreater{} Accum(Open+New) \ldots{} Também acho que vale a pena \% mostrar o número de opens. \% 
+% MARCIO: além disso, falta um pedaço de linha vermelha no segundo gráfico. Pq? \% 
 
-\% \% MARCIO: adiciona a linha de comentários Open. \% BRUNO: coloquei o
-estoque de comentários (e o de alertas) a cada versão. Se a transição é
-versão \%x-versão y, o número de alertas/comentários na versão y = open
-+ new \%
+% Bruno: não tinha estoque aí, era sempre transição. existem versões pra trás. \%Faltavam uns itens de arquivos que não existiam dos dois lados. Acho que os \%gráficos \%estão mais \%claros agora que botei o estoque \%
+
+% MARCIO: adiciona a linha de comentários Open. 
+% BRUNO: coloquei o estoque de comentários (e o de alertas) a cada versão. Se a transição é versão x -> versão y, o número de alertas/comentários na versão y é open + new \%
 
 \small
 
@@ -1186,15 +1187,16 @@ versão \%x-versão y, o número de alertas/comentários na versão y = open
 
 \normalsize
 
-\% \% MARCIO: de quanto é esta correlação? Como lemos os gráficos das
-figuras 6 e 7? \% \% Bruno: dei uma exoplicada melhor nesta parte
+% MARCIO: de quanto é esta correlação? Como lemos os gráficos das figuras 6 e 7? 
+% Bruno: dei uma exoplicada melhor nesta parte
 
 Hereafter we analyse the relation between the amount of new alerts and
 the amount of new comments.
 
-\[PropNewAlerts = \frac{NewAlerts}{NewAlerts + OldAlerts}\]
-
-\[PropNewComments = \frac{NewComments}{NewComments + OldComments}\]
+The proportion of new alerts is given by the Equation \ref{eq_prop_new_alerts} and the proportion of new comments, by the Equation \ref{eq_prop_new_comments}
+\begin{equation} \label{eq_prop_new_comments}
+PropNewComments = \frac{NewComments}{NewComments + OldComments}
+\end{equation}
 
 The correlation between the proportion of new alerts and the proportion
 of new comments is 0.38.
@@ -1223,7 +1225,7 @@ and new alert was detected by chance. Table \ref{tab_reg} shows the
 results of this regressions. The P-Value of the beta is 0.049. This
 means that, if there actually is not a linear relation between new
 alerts proportion and new comments proportion, we would have
-aproximately a probability of 5\% to get a result as extreme as we got.
+approximately a probability of 5\% to get a result as extreme as we got.
 The estimation for \(\beta\) is 0.44, meaning that for each additional
 1pp in the proportion of new alerts we would have 0.44 pp in the
 proportion of new comments. The \(R^2\) is 0.14, so we could say that
@@ -1251,13 +1253,18 @@ New Alerts Proportion & 0.44 & 0.00, 0.87 & 0.049\\
 \normalsize
 
 In the next steps, we can refine the way we select the SATD comments.
-There are papers that use more sofisticated schemes to identify them,
+There are papers that use more sophisticated schemes to identify them,
 using Natural Language Processing, for instance. Following these steps
 maybe we will be able to get more certainty about the relation between
 alerts and SATD comments. Maybe we will be able to explain a greater
 part of the variability in the proportion of new SATD comments.
 
+
 \section{References}
+
+%
+% MARCIO: que forma estranha de definir as referências ...
+%
 
 \hypertarget{refs}{}
 \leavevmode\hypertarget{ref-Potdar2014}{}%
@@ -1266,11 +1273,13 @@ self-admitted technical debt.'' \emph{Proceedings - 30th International
 Conference on Software Maintenance and Evolution, ICSME 2014}, 91--100.
 \url{https://doi.org/10.1109/ICSME.2014.31}.
 
+\noindent
 \leavevmode\hypertarget{ref-Sierra2019}{}%
 Sierra, Giancarlo, Emad Shihab, and Yasutaka Kamei. 2019. ``A survey of
 self-admitted technical debt.'' Elsevier Inc.
 \url{https://doi.org/10.1016/j.jss.2019.02.056}.
 
+\noindent
 \leavevmode\hypertarget{ref-Wehaibi2016}{}%
 Wehaibi, Sultan. 2016. ``Satd-Patterns.''
 \url{https://github.com/xsultan/satd-patterns}.
