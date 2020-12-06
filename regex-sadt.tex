@@ -1,0 +1,527 @@
+\begin{longtable}{r|l}
+\hline
+\# & Expression\\
+\hline
+\endfirsthead
+
+\multicolumn{2}{@{}l}{\textit{(continued)}}\\
+\hline
+\# & Expression\\
+\hline
+\endhead
+
+1 & (:?doesn't|does not) take into account\\
+%\hline
+2 & (:?don't|do not) understand\\
+%\hline
+3 & (:?it|this) (?:is|seems) ?[[:alnum:][:space:]]* a part implementation\\
+%\hline
+4 & (:?it|this) (?:is|seems) ambiguous\\
+%\hline
+5 & (:?it|this) ?[[:alnum:][:space:]]* should be\\
+%\hline
+6 & (:?it|this) ?[[:alnum:][:space:]]* should not\\
+%\hline
+7 & (:?it|this) ?[[:alnum:][:space:]]* shouldn't\\
+%\hline
+8 & (:?it|this) is never executed\\
+%\hline
+9 & (:?it|this) is planned to refactor\\
+%\hline
+10 & (:?it|this) should ?[[:alnum:][:space:]]* be ?[[:alnum:][:space:]]* the other way round\\
+%\hline
+11 & (:?it|this) should ?[[:alnum:][:space:]]* be extended\\
+%\hline
+12 & (:?it|this) should ?[[:alnum:][:space:]]* be using\\
+%\hline
+13 & (:?this|the|it) ?[[:alnum:][:space:]]* contains a ?[[:alnum:][:space:]]* error\\
+%\hline
+14 & (?:the|it|this) ?[[:alnum:][:space:]]* only works\\
+%\hline
+15 & (?:this|it) ?.* does not work\\
+%\hline
+16 & (?:this|it)?[[:alnum:][:space:]]* is in the wrong place\\
+%\hline
+17 & (?:todo:|needs-more-work:)[ ]*check\\
+%\hline
+18 & (?:todo:|needs-more-work:)[ ]*complete this\\
+%\hline
+19 & (?:todo:|needs-more-work:)[ ]*constraints\\
+%\hline
+20 & (?:todo:|needs-more-work:)[ ]*document\\
+%\hline
+21 & (?:todo:|needs-more-work:)[ ]*find a way to\\
+%\hline
+22 & (?:todo:|needs-more-work:)[ ]*review\\
+%\hline
+23 & (?:todo:|needs-more-work:)[ ]*verify\\
+%\hline
+24 & (?:todo:|needs-more-work:)[ ]*what\textbackslash{}?\\
+%\hline
+25 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* algorithm\\
+%\hline
+26 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* in some cases\\
+%\hline
+27 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* incomplete\\
+%\hline
+28 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* not ?[[:alnum:][:space:]]* completely\\
+%\hline
+29 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* this does\\
+%\hline
+30 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* unfinished\\
+%\hline
+31 & (?:todo|needs-more-work):[ ]*add\\
+%\hline
+32 & (?:todo|needs-more-work):[ ]*assumes\\
+%\hline
+33 & (?:todo|needs-more-work):[ ]*constructors\\
+%\hline
+34 & (?:todo|needs-more-work):[ ]*define\\
+%\hline
+35 & (?:todo|needs-more-work):[ ]*disable\\
+%\hline
+36 & (?:todo|needs-more-work):[ ]*fix\\
+%\hline
+37 & (?:todo|needs-more-work):[ ]*handle\\
+%\hline
+38 & (?:todo|needs-more-work):[ ]*improve\\
+%\hline
+39 & (?:todo|needs-more-work):[ ]*make\\
+%\hline
+40 & (?:todo|needs-more-work):[ ]*move\\
+%\hline
+41 & (?:todo|needs-more-work):[ ]*not implemented\\
+%\hline
+42 & (?:todo|needs-more-work):[ ]*provide\\
+%\hline
+43 & (?:todo|needs-more-work):[ ]*remove\\
+%\hline
+44 & (?:todo|needs-more-work):[ ]*replace\\
+%\hline
+45 & (?:todo|needs-more-work):[ ]*should\\
+%\hline
+46 & (?:todo|needs-more-work):[ ]*split\\
+%\hline
+47 & (?:todo|needs-more-work):[ ]*this ?[[:alnum:][:space:]]* needs\\
+%\hline
+48 & (?:todo|needs-more-work):[ ]*this ?[[:alnum:][:space:]]* should\\
+%\hline
+49 & (?:todo|needs-more-work):[ ]*treat\\
+%\hline
+50 & (?:todo|needs-more-work):[ ]*use\\
+%\hline
+51 & (?:todo|needs-more-work):[ ]*we ?[[:alnum:][:space:]]* need\\
+%\hline
+52 & (?:todo|needs-more-work):[ ]*what\textbackslash{}?\\
+%\hline
+53 & (?:todo|needs-more-work):[ ]*why\\
+%\hline
+54 & [do not|don't] ?[[:alnum:][:space:]]* understand the code\\
+%\hline
+55 & \textbackslash{}:\textbackslash{}-\textbackslash{}(\\
+%\hline
+56 & a ?[[:alnum:][:space:]]* better way of doing this would\\
+%\hline
+57 & a better implementation would be\\
+%\hline
+58 & abandon all hope\\
+%\hline
+59 & always check for\\
+%\hline
+60 & at a loss\\
+%\hline
+61 & at the moment\\
+%\hline
+62 & awkward\\
+%\hline
+63 & bad smell\\
+%\hline
+64 & bail out\\
+%\hline
+65 & barf\\
+%\hline
+66 & brute force\\
+%\hline
+67 & buggy\\
+%\hline
+68 & can we remove\\
+%\hline
+69 & cause for issue\\
+%\hline
+70 & causes issue\\
+%\hline
+71 & causes? ?[[:alnum:][:space:]]* errors?\\
+%\hline
+72 & certainly buggy\\
+%\hline
+73 & check that this is correct\\
+%\hline
+74 & crap\\
+%\hline
+75 & crappy\\
+%\hline
+76 & do not use this\\
+%\hline
+77 & do we ?[[:alnum:][:space:]]* need ?[[:alnum:][:space:]]* this\\
+%\hline
+78 & does not handle\\
+%\hline
+79 & does not work\\
+%\hline
+80 & does this help\\
+%\hline
+81 & don't think so\\
+%\hline
+82 & don't use this\\
+%\hline
+83 & double counted\\
+%\hline
+84 & doubt that this would work\\
+%\hline
+85 & dummy implementation\\
+%\hline
+86 & enhance so that\\
+%\hline
+87 & explain that this ?[[:alnum:][:space:]]* works also\\
+%\hline
+88 & fix this\\
+%\hline
+89 & fix this crap\\
+%\hline
+90 & fixme\\
+%\hline
+91 & for a next refactoring\\
+%\hline
+92 & fragile\\
+%\hline
+93 & get rid of this\\
+%\hline
+94 & give up and go away\\
+%\hline
+95 & good enough\\
+%\hline
+96 & hack\\
+%\hline
+97 & hacky\\
+%\hline
+98 & hang our heads in shame\\
+%\hline
+99 & hardcoded\\
+%\hline
+100 & hardwired\\
+%\hline
+101 & hope everything will work\\
+%\hline
+102 & hopefully\\
+%\hline
+103 & horrible\\
+%\hline
+104 & how can this possibly be\\
+%\hline
+105 & how come this happens\\
+%\hline
+106 & how to avoid\\
+%\hline
+107 & i'd suggest that\\
+%\hline
+108 & i [do not|don't] know\\
+%\hline
+109 & i [do not|don't] see ?[[:alnum:][:space:]]* reason for\\
+%\hline
+110 & i don't know\\
+%\hline
+111 & in the future\\
+%\hline
+112 & inconsistency\\
+%\hline
+113 & is (:?it|this) possible\\
+%\hline
+114 & is (?:it|this|the) ?[[:alnum:][:space:]]* still useful\\
+%\hline
+115 & is (?:this|it) ?[[:alnum:][:space:]]* correct\\
+%\hline
+116 & is ?[[:alnum:][:space:]]* the right thing here\\
+%\hline
+117 & is done twice\\
+%\hline
+118 & is it a bug\\
+%\hline
+119 & is not so beautiful\\
+%\hline
+120 & is problematic\\
+%\hline
+121 & is this .*needed\\
+%\hline
+122 & is this a good way ?[[:alnum:][:space:]]*\textbackslash{}?\\
+%\hline
+123 & is this line really safe\\
+%\hline
+124 & is this next line safe\\
+%\hline
+125 & it does not work yet\\
+%\hline
+126 & it doesn't work yet\\
+%\hline
+127 & it is planned to refactor\\
+%\hline
+128 & it is unclear to me\\
+%\hline
+129 & it works,? but\\
+%\hline
+130 & it would be ?[[:alnum:][:space:]]* more efficient to\\
+%\hline
+131 & it would be better to\\
+%\hline
+132 & just a guess\\
+%\hline
+133 & just abandon it\\
+%\hline
+134 & kaboom\\
+%\hline
+135 & kludge\\
+%\hline
+136 & less elegant ?[[:alnum:][:space:]]* that works\\
+%\hline
+137 & magic numbers?\\
+%\hline
+138 & make (?:it|this) configurable\\
+%\hline
+139 & may cause problem\\
+%\hline
+140 & nasty\\
+%\hline
+141 & necessary\textbackslash{}?\\
+%\hline
+142 & necessary\textbackslash{}?\\
+%\hline
+143 & need to be changed\\
+%\hline
+144 & need to be reviewed\\
+%\hline
+145 & need to replace this\\
+%\hline
+146 & needs to be ?[[:alnum:][:space:]]* after stable release\\
+%\hline
+147 & needs to be fixed\\
+%\hline
+148 & needs to be tidied up\\
+%\hline
+149 & needs to be updated\\
+%\hline
+150 & needs to be updated\\
+%\hline
+151 & never get executed\\
+%\hline
+152 & no point in doing this\\
+%\hline
+153 & not exact, but close\\
+%\hline
+154 & not strictly correct\\
+%\hline
+155 & not sure ?[[:alnum:][:space:]]* (?:this|it) belongs here\\
+%\hline
+156 & not sure this is ?[[:alnum:][:space:]]* right\\
+%\hline
+157 & not sure whether this belongs here\\
+%\hline
+158 & not the right location\\
+%\hline
+159 & nuke\\
+%\hline
+160 & once we go ?[[:alnum:][:space:]]* we won't need this\\
+%\hline
+161 & ouch\\
+%\hline
+162 & pending\\
+%\hline
+163 & please explain this\\
+%\hline
+164 & potential ?[[:alnum:][:space:]]* issue\\
+%\hline
+165 & probably a bug\\
+%\hline
+166 & problematic\\
+%\hline
+167 & prolly a bug\\
+%\hline
+168 & prove that this works\\
+%\hline
+169 & purists would\\
+%\hline
+170 & really should be\\
+%\hline
+171 & really should be\\
+%\hline
+172 & remove me before production\\
+%\hline
+173 & remove one of them\\
+%\hline
+174 & remove this before production\\
+%\hline
+175 & remove this code\\
+%\hline
+176 & replace by ?[[:alnum:][:space:]]* elegant\\
+%\hline
+177 & retarded\\
+%\hline
+178 & risk of this blowing up\\
+%\hline
+179 & shall not be\\
+%\hline
+180 & shame\\
+%\hline
+181 & should match ?[[:alnum:][:space:]]* uml\\
+%\hline
+182 & should not be using ?[[:alnum:][:space:]]* here\\
+%\hline
+183 & should there really be ?[[:alnum:][:space:]]* \textbackslash{}?\\
+%\hline
+184 & shouldn't we ?[[:alnum:][:space:]]* do something ?[[:alnum:][:space:]]* here\\
+%\hline
+185 & silly\\
+%\hline
+186 & some fatal error\\
+%\hline
+187 & something ?[[:alnum:][:space:]]* gone wrong\\
+%\hline
+188 & something bad happened\\
+%\hline
+189 & something bad is going on\\
+%\hline
+190 & something serious is wrong\\
+%\hline
+191 & strange construction\\
+%\hline
+192 & stupid\\
+%\hline
+193 & temporary crutch\\
+%\hline
+194 & temporary fix\\
+%\hline
+195 & temporary solution\\
+%\hline
+196 & test this\\
+%\hline
+197 & that's for a next refactoring\\
+%\hline
+198 & the ?[[:alnum:][:space:]]* (?:is|seems) redundant\\
+%\hline
+199 & there ?[[:alnum:][:space:]]* must be a check\\
+%\hline
+200 & there ?[[:alnum:][:space:]]* ought to be a check\\
+%\hline
+201 & there is a problem\\
+%\hline
+202 & this (?:is|seems) ?[[:alnum:][:space:]]* expensive way to\\
+%\hline
+203 & this (?:is|seems) a temporary method\\
+%\hline
+204 & this ?[[:alnum:][:space:]]* (?:is|seems) ?[[:alnum:][:space:]]* redundant\\
+%\hline
+205 & this can be a mess\\
+%\hline
+206 & this creates a dependency\\
+%\hline
+207 & this does exactly the same\\
+%\hline
+208 & this does not look right\\
+%\hline
+209 & this doesn't look right\\
+%\hline
+210 & this error needs to be\\
+%\hline
+211 & this indicates a ?[[:alnum:][:space:]]* problem\\
+%\hline
+212 & this is already defined\\
+%\hline
+213 & this is bs\\
+%\hline
+214 & this is temporary and will go away\\
+%\hline
+215 & this is uncool\\
+%\hline
+216 & this is wrong\\
+%\hline
+217 & this isn't quite right\\
+%\hline
+218 & this isn't very solid\\
+%\hline
+219 & this needs work\\
+%\hline
+220 & this should use ?[[:alnum:][:space:]]* instead of\\
+%\hline
+221 & this will ?[[:alnum:][:space:]]* not be perfect\\
+%\hline
+222 & this will fail\\
+%\hline
+223 & too primitive\\
+%\hline
+224 & toss it\\
+%\hline
+225 & treat .*as a soft error\\
+%\hline
+226 & trial and error\\
+%\hline
+227 & turn off after built\\
+%\hline
+228 & ugly\\
+%\hline
+229 & unknown why we ever experience this\\
+%\hline
+230 & untested\\
+%\hline
+231 & until code is reviewed\\
+%\hline
+232 & unused?\\
+%\hline
+233 & wasteful\\
+%\hline
+234 & we ?[[:alnum:][:space:]]* (?:don't|do not) need (?:it|this) any more\\
+%\hline
+235 & we ?[[:alnum:][:space:]]* do not want\\
+%\hline
+236 & we ?[[:alnum:][:space:]]* don't want\\
+%\hline
+237 & we can remove\\
+%\hline
+238 & we need a better\\
+%\hline
+239 & we presume\\
+%\hline
+240 & we should not need this\\
+%\hline
+241 & we shouldn't need this\\
+%\hline
+242 & what (?:shall|should) we do here\\
+%\hline
+243 & what do we want to use .*\textbackslash{}?\\
+%\hline
+244 & what if we need to .*\textbackslash{}?\\
+%\hline
+245 & what is this trying to do\textbackslash{}?\\
+%\hline
+246 & why (?:is|are) ?[[:alnum:][:space:]]* being ignored\\
+%\hline
+247 & why ?[[:alnum:][:space:]]* continue here as if nothing has gone wrong\textbackslash{}?\\
+%\hline
+248 & why aren't we ?[[:alnum:][:space:]]* \textbackslash{}?\\
+%\hline
+249 & why is this code commented\\
+%\hline
+250 & why isn't this done\\
+%\hline
+251 & why there is not test\\
+%\hline
+252 & workaround\\
+%\hline
+253 & workaround for bug\\
+%\hline
+254 & would be better here\\
+%\hline
+255 & you can be unhappy now\\
+%\hline
+256 & yuck\\
+\hline
+\end{longtable}
+
+

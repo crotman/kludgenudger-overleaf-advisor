@@ -172,7 +172,7 @@ partial function is undefined for some elements in the formal domain.
 For instance, the square root function restricted to the integers:
 \(f(25)\) is defined, but \(f(26)\) is undefined. In terms of features,
 we can think about a developer calculating the point on which two lines
-cross and neglecting the case of parallel lines
+cross and neglecting the case of parallel lines;
 
 \begin{enumerate}
 \setcounter{enumi}{1}
@@ -190,8 +190,8 @@ static source code analyzer that is commonly used to find potential
 programming flaws. PMD is a good choice for a researcher to analyze bad
 practices, because it supports multiple languages and it is very
 flexible. It allows the researcher to provide his own rules for finding
-interesting patterns in a source code in Java or other languages. These
-are the planned steps for this research project:
+interesting patterns in a source code in Java or other languages. The
+planned steps for this research project are:
 
 \begin{itemize}
 \item
@@ -209,8 +209,7 @@ are the planned steps for this research project:
 \item
   If all these assumptions are true, use mechanism design to devise how
   we can change the environment in a way that developers do not choose
-  to make so much kludge, increasing the quality of the project in the
-  long run;
+  to make so many kludges, increasing project quality in the long run;
 
 \item
   Implement this mechanism building a plugin for a prominent CI tool,
@@ -227,9 +226,9 @@ to a new version. This algorithm is described in Section \ref{alg}. In
 Section \ref{results}, we compare the creation of new alerts with the
 insertion of Self Admitted Technical Debt (SATD) comments.
 
-\% ========================================================= \% \% PMD
-SOURCE CODE ANALYZER \% \%
-=========================================================
+% ========================================================= % 
+% PMD SOURCE CODE ANALYZER % 
+%=========================================================
 
 \section{The PMD Source Code Analyzer}\label{pmd}
 
@@ -412,13 +411,6 @@ statement & 24 & 9 & 24 & 36\\
 
 \normalsize
 
-\% \% MARCIO: o que significa ser ``descendente'' no parágrafo abaixo?
-\% \% Bruno: acredito que melhorei a explicação \% \% MARCIO: Não sei se
-``descendente'' seria o melhor termo, pois não há \% uma herança aqui.
-Não seria um ``componente'' ou ``parte de B''? \% \%Bruno: deixei
-descendente apenas no contexto da AST. Neste caso creio que é o termo
-correto. Posso usar subchild também, mas é um termo menos comum
-
 Looking at Table \ref{tab_nodes}, we see that there is information about
 the location of the nodes, in terms of lines and columns. We can infer
 which nodes are contained in other nodes, because we can compare the
@@ -447,9 +439,9 @@ follow three steps to recreate the AST:
   Proceed a deep-first search starting from the compilation unit node.
 \end{enumerate}
 
-\% ========================================================= \% \%
-RESEARCH QUESTIONS \% \%
-=========================================================
+% ========================================================= % 
+% RESEARCH QUESTIONS % 
+%=========================================================
 
 \section{Research questions}
 \label{as_whole}
@@ -463,12 +455,6 @@ to identify if there was an intense introduction of PMD alerts. This
 evidence of possible kludge introduction must be normalized by the size
 of the change in source code between the two versions. We do this by
 following this formula:
-\%\footnote{Another possibility is to use this formula \[ \frac{\#NewAlerts - \#FixedAlerts}{Change}    \], where Change can be a measure based on the differences between the versions}:
-
-\% \% MARCIO: isto está estranho. Você só menciona o tamanho da mudança
-na nota \% de rodapé. \% \% Bruno: explicitei o que chamo de change \%
-\% MARCIO: ok, mas não seria melhor colocar tudo na mesma equação, como
-fiz \% abaixo? \% \%Bruno - OK
 
 \[ \frac{\#NewAlerts - \#FixedAlerts}{Change}    \]
 
@@ -481,9 +467,6 @@ alerts, we can correlate these events with some other evidence of
 kludge. In Section \ref{results}, we calculate this correlation using
 \textit{Self-Admitted Technical Debt} (SATD) comments.
 
-\% \% MARCIO: você deveria usar e referenciar a equação acima na Seção
-5. \%
-
 \vspace{16px}
 
 \noindent \textbf{RQ: Do kludges harm software development?}
@@ -494,9 +477,9 @@ kludges. A drop in the popularity may not be a proper evidence. The
 increment in the number of issues and bug fixed nor necessarily
 represent a degradation. Churn could be used here.
 
-\% ========================================================= \% \%
-ALGORITHMS \% \%
-\%=========================================================
+% ========================================================= 
+% ALGORITHMS \% 
+%%=========================================================
 
 \section{An algorithm to classify alerts}
 \label{alg}
@@ -522,8 +505,9 @@ shows the steps of the algorithm we are describing.
 
 \begin{figure}
   \centering
-  \smartdiagram[sequence diagram]{Get alerts for each version, Create AST for each version, Map new lines to old lines, Calculate features for each pair of alert, Decide if the alerts are the same, Classify alerts }
-\vspace{5mm}\par
+  \resizebox{1.0\textwidth}{!}{%
+  \smartdiagram[sequence diagram]{Get alerts for each version, Create AST for each version, Map new lines to old lines, Calculate features for each pair of alert, Decide if the alerts are the same, Classify alerts}
+  }
   \caption{Steps of the algorithm to classify alerts}\label{fig:diag}
 \end{figure}
 
@@ -536,8 +520,8 @@ version. So we expect one alert \textbf{Fixed} in the old version, one
 alert \textbf{Open} in the old version, and the same \textbf{Open} alert
 in the new version.
 
+\vspace{12px}
 \scriptsize
-
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{/*  1{-}   */}\KeywordTok{package}\ImportTok{ pack\_x;                                          /*  1{-}   */package pack\_x;}                                          
@@ -755,9 +739,6 @@ version. The correspondence uses the mapping defined in Section
 \ref{map}. For this combination, the ``Same Method Group ID'\,' feature
 is FALSE.
 
-\% \% MARCIO: acima é mesmo ``begin and end lines of the alert'' ou
-seria ``begin and end \% lines of the methods''? \% \%Bruno: sim
-
 \small
 
 \begin{figure}[H]
@@ -794,20 +775,11 @@ in the old version do correspond to the lines in the new version. The
 correspondence uses the map defined in Section \ref{map}. For this
 combination, the ``Same Method Group ID'\,' feature is TRUE.
 
-\% \% MARCIO: mesma consideração feita acima \ldots{} \% \%Bruno: sim
-
-\small
-
 \begin{figure}[H]
 \includegraphics[width=1\linewidth]{report_files/figure-latex/unnamed-chunk-10-1} \caption{Abstract Syntax Tree. Nodes with the same number are equivalent \label{path_node_to_root_2}}\label{fig:unnamed-chunk-10}
 \end{figure}
 
-\normalsize
-
-\small
-
 \begin{table}[H]
-
 \caption{\label{tab:unnamed-chunk-11}Defining if Same Method Group ID \label{tab_same_method_2}}
 \centering
 \begin{tabular}[t]{l|r|r|r}
@@ -820,8 +792,6 @@ End line & 25 & 27 & 27\\
 \hline
 \end{tabular}
 \end{table}
-
-\normalsize
 
 \noindent \textbf{Same Method Name}: a Boolean indicator that tells if
 the alerts were found in a method with the same name. The methods for
@@ -859,7 +829,6 @@ we are following.
 \small
 
 \begin{table}[H]
-
 \caption{\label{tab:unnamed-chunk-12}Line distance feature \label{tab_line_distance}}
 \centering
 \resizebox{\linewidth}{!}{
@@ -953,15 +922,6 @@ method, even if the name or the method is not the same. But if the
 method code is the same, then the alert code and the kind of the alert
 must be the same;
 
-\% \% MARCIO: esta regra está meio estranha. Para que usa o Same Method
-Group ID se está \% usando a comparação de código aqui? \% \%Bruno: nao
-estou Method Group ID, mas o código do Method. Está confuso usar as
-palavras Code e ID? Posso usar SourceCode pra deixar claro que não é um
-código numérico identificador mas sim o código-fonte \% \scriptsize \[
-\begin{aligned}
-(SameRule \land SameCode \land SameMethodCode \Rightarrow SameAlert
-\end{aligned}\]
-
 \normalsize
 
 If the kind of alert is the same, and at least one of the features about
@@ -978,12 +938,6 @@ LineDistance < 5) \Rightarrow SameAlert
 \end{aligned}\]
 
 \normalsize
-
-\% \% MARCIO: o que significa ``we must have evidence that the method is
-the same''? \% \% MARCIO: ``Same Group ID''=TRUE não implica que Line
-Distance = 0? Se for o caso, \% as duas últimas regras são redundantes.
-\% \%Sim, posso juntar. Tava pensando em dar um peso diferente quando eu
-tivesse mais certeza, mas desisti
 
 Table \ref{table_features_with_decision} shows the resulting features of
 the two combinations of alerts in the example we are following and the
@@ -1120,699 +1074,119 @@ alerts and the insertion of \textit{Self-Admitted Technical Debt}
 comments in a transition between an old and a new version of source
 code.
 
-In (Potdar and Shihab 2014), the authors discuss that the existence of
-comments that contain some specific patterns may indicate what they call
-Self-Admitted Technical Debts (SATD). In (Sierra, Shihab, and Kamei
-2019), Self-Admitted Technical Debt is defined as the event in which the
-developer consciously introduce debt. According to these two works, the
-developer acknowledges the SATD in the form of comments. In (Wehaibi
-2016) we can find some patterns based on the work of Potdar and Shihab.
-For instance, some of these patterns are ``hack'', ``retarded'',
-``remove this code'', ``treat this as a soft error'', ``kludge'',
-``fixme'', ``this isn't quite right'', ``fix this crap'', ``abandon all
-hope'' and ``kaboom''. We used all the terms used by the authors and
-added other terms that we found in the code and which we consdidered
-indicators of SATDs. To find these additional terms, we sampled 5,000
-comments and looked at them in order to recognize expressions that we
-judged as indicators of SATDs. All the regular expressions representing
-these terms are listed in Section \ref{sec_SATDs}.
+%
+% MARCIO: colocar as referências abaixo como referências e não escritas diretamente
+% no texto.
+%
 
-We select 32 tagged and released versions of the project ArgoUML. They
-were released between 2001-04-06 and 2011-12-15. For each pair of
-sequential versions, we generate the PMD Alerts and categorise the
-identified alerts as \textbf{New}, \textbf{Fixed} or \textbf{Open} using
-the algorithm described in Section \ref{alg}. We want to understand if
-the number of new alerts, normalized by the magnitude of the change
-between two versions, is a good proxy for the amount of kludge
-introduced in the code base. A first approach we try in this preliminary
-investigation is to measure the correlation between the normalized
-amount of new alerts and comments that indicate
-\textit{Self-Admitted Technical Debt}.
+Potdar and Shihab (2014) discuss that the existence of comments that contain specific patterns may indicate what they call Self-Admitted Technical Debts (SATD). Sierra, Shihab, and Kamei (2019) define Self-Admitted Technical Debt as the event in which the developer consciously introduces debt. According to these work, the developer acknowledges the SATD in the form of comments. Wehaibi (2016) presents some patterns based on the work of Potdar and Shihab (2014). These patterns include, though they are not limited to, ``hack'', ``retarded'', ``remove this code'', ``treat this as a soft error'', ``kludge'', ``fixme'', ``this isn't quite right'', ``fix this crap'', ``abandon all hope'' and ``kaboom''. We used all the terms mentioned by the authors and added other terms that we found in code and which we considered indicators of SATDs. To find these additional terms, we sampled 5,000 comments and looked at them to recognize expressions that we judged as indicators of SATDs. The regular expressions representing these terms are listed in the Appendix.
 
-\small
+We selected 32 tagged and released versions of the ArgoUML project. They were released between 2001-04-06 and 2011-12-15. For each pair of sequential versions, we generated the PMD Alerts and categorised them as \textbf{New}, \textbf{Fixed} or \textbf{Open} using the algorithm described in Section \ref{alg}. We want to understand if the number of new alerts, normalized by the magnitude of the change between two versions, is a good proxy for the amount of kludge introduced in the code base. A first approach we try in this preliminary investigation is to measure the correlation between the normalized amount of new alerts and comments indicating SADT. %\textit{Self-Admitted Technical Debt}.
 
-\normalsize
-
-Figure \ref{timeseries} shows, in the first plot, the number of alerts
-at the end of each version transition. In the second plot it shows the
-number of new and fixed alerts. The third plot shows the number of
-comments that contain expressions listed in the Section \ref{sec_SATDs}.
-The fourth plot, shows the number of new and fized comments in each
-version transition. We classify each comment as \textbf{New},
-\textbf{Fixed}, and \textbf{Open} by using the following procedure: if
-the text in the comment is the same as in the preceding version, the
-comment is classified as \textbf{Open}; the remaining ones are
-classified as \textbf{Fixed}, if they are in the old version and
-\textbf{New} if they are in the new version.
-
-\% \% MARCIO: tem certeza destes números? o primeiro pico parece
-corrigir mais erros \% do que tem em estoque. O mesmo acontece para o
-segundo pico. Dá uma conferida \% se em algum momento Fixed
-\textgreater{} Accum(Open+New) \ldots{} Também acho que vale a pena \%
-mostrar o número de opens. \% \% MARCIO: além disso, falta um pedaço de
-linha vermelha no segundo gráfico. Pq? \% \% Bruno: não tinha estoque
-aí, era sempre transição. existem versões pra trás. \%Faltavam uns itens
-de arquivos que não existima dos dois lados. Acho que os \%gráficos
-\%estão mais \%claros agora que botei o estoque \%
-
-\% \% MARCIO: adiciona a linha de comentários Open. \% BRUNO: coloquei o
-estoque de comentários (e o de alertas) a cada versão. Se a transição é
-versão \%x-versão y, o número de alertas/comentários na versão y = open
-+ new \%
-
-\small
-
-\normalsize
-
-\small
+The first plot in Figure \ref{timeseries} shows the number of alerts at the end of each version transition. The second plot shows the number of new and fixed alerts. The third plot shows the number of comments that contain expressions listed in the Section \ref{sec_SATDs}. The fourth plot shows the number of new and fixed comments in each version transition. We classify each comment as \textbf{New}, \textbf{Fixed}, and \textbf{Open} by using the following procedure: if the text in the comment is the same as in the preceding version, the comment is classified as \textbf{Open}; the remaining ones are classified as \textbf{Fixed}, if they are in the old version, or \textbf{New} if appeared in the new version.
 
 \begin{figure}
-\centering
-\includegraphics{report_files/figure-latex/unnamed-chunk-21-1.pdf}
-\caption{\label{timeseries}Changes, alerts and comments}
+    \centering
+    \resizebox{0.75\linewidth}{!}{
+        \includegraphics{report_files/figure-latex/unnamed-chunk-21-1.pdf}
+    }
+    \caption{\label{timeseries}Changes, alerts and comments}
 \end{figure}
 
-\normalsize
+Hereafter, we analysed the relation between the amount of new alerts and the amount of new comments. The proportion of new alerts and new comments are given by the equations below. We have found that the correlation between the proportion of new alerts and the proportion of new comments is 0.50.
 
-\newpage
+\[NewAlertsProportion = \frac{NewAlerts}{NewAlerts + OldAlerts}\]
 
-\small
+\[NewCommentsProportion = \frac{NewComments}{NewComments + OldComments}\]
 
-\normalsize
+%
+% MARCIO: você não definir OldAlerts. OldAlerts = Open?
+%
 
-\% \% MARCIO: de quanto é esta correlação? Como lemos os gráficos das
-figuras 6 e 7? \% \% Bruno: dei uma exoplicada melhor nesta parte
+%
+% MARCIO: na seção 3 você menciona uma análise, mas aqui faz outra. Qual é a mais
+% correta? Faz sentido fazer as duas? Com certeza não faz sentido ter uma lá e
+% outra aqui.
+%
 
-Hereafter we analyse the relation between the amount of new alerts and
-the amount of new comments.
+Figure \ref{scatter_prop} shows a scatter plot with the relation between the proportion of new alerts and the proportion of new comments. We added a regression line obtained using the following model:
 
-\[PropNewAlerts = \frac{NewAlerts}{NewAlerts + OldAlerts}\]
+\[ NewCommentsProportion = \alpha + \beta \times NewAlertsProportion \]
 
-\[PropNewComments = \frac{NewComments}{NewComments + OldComments}\]
-
-The correlation between the proportion of new alerts and the proportion
-of new comments is 0.50.
-
-Figure \ref{scatter_prop} shows a scatter plot with the relation between
-the proportion of new alerts and the proportion of new comments. We
-added a regression line obtained from the following model:
-
-\[ NewCommentsProportions = \alpha + \beta NewAlertsProportion \]
-
-The shaded region represents the confidence interval of the prediction
-of the proportion of alerts given the proportion of comments. As in any
-linear regression model, the confidence interval is wider in the
-extremes, since there is uncertainty related to the estimator of
-intercept \(\hat{\alpha}\) and also to the estimator of the slope of the
-regression line \(\hat{\beta}\).
-
-\small
+The shaded region represents the confidence interval of the prediction of the proportion of alerts given the proportion of comments. As in any linear regression model, the confidence interval is wider in the extremes, since there is uncertainty related to the estimator of intercept \(\hat{\alpha}\) and also to the estimator of the slope of the regression line \(\hat{\beta}\).
 
 \begin{figure}
-\centering
-\includegraphics{report_files/figure-latex/unnamed-chunk-23-1.pdf}
-\caption{\label{scatter_prop}Proportion of new alerts x Proportion of
-new comments}
+    \centering
+    \resizebox{0.75\linewidth}{!}{
+    \includegraphics{report_files/figure-latex/unnamed-chunk-23-1.pdf}
+    }
+    \caption{\label{scatter_prop}Proportion of new alerts x Proportion of
+    new comments}
 \end{figure}
 
-\normalsize
+Next, we evaluated whether the positive correlation we see between the proportion of new comments and the proportion of new alerts was found by chance. Table \ref{tab_reg} shows the results of this regression. The \textit{p-value} of the beta nears zero. This means that it would be very unlikely to get a result as extreme as shown in Figure \ref{scatter_prop} if there wasn't a linear relation between new alerts proportion and new comments proportion. The estimation for \(\beta\) is 0.57, meaning that for each additional 1 pp in the proportion of new alerts we observe, on average, an additional 0.53 pp in the proportion of new comments. The \(R^2\) is 0.25, so we could say that 25\% of the variability in the proportion of new comments is explained by the variation in the proportion of new alerts.
 
-\small
+%
+% MARCIO: o que é o pp?
+%
 
-\normalsize
+%
+% MARCIO: R2 = 25% é bem ruim. Quanto tempo você levaria para fazer a mesma 
+% análise em um segundo projeto?
+%
 
-We can evaluate if the positive relation we see between the new comments
-and new alert was detected by chance. Table \ref{tab_reg} shows the
-results of this regressions. The P-Value of the beta near zero. This
-means that, if there actually is not a linear relation between new
-alerts proportion and new comments proportion, it woukld be vwry
-unlikely to get a result as extreme as we got. The estimation for
-\(\beta\) is 0.57, meaning that for each additional 1pp in the
-proportion of new alerts we observe, on average, additional 0.53 pp in
-the proportion of new comments. The \(R^2\) is 0.25, so we could say
-that 25\% of the variability in the proportion of new comments can be
-explained by the variation in the proportion of new alerts.
+%
+% MARCIO: acima "an additional 0.53 pp" seria "an additional 0.57 pp", certo?
+%
 
-\small
+%
+% MARCIO: tem como fazer uma análise qualitativa dos quatro principais outliers?
+% o que aconteceu nestas versões?
+%
 
-\begin{table}
-
+\begin{table}[h!]
 \caption{\label{tab:unnamed-chunk-25}\label{tab_reg} Regression: comments on alerts}
 \centering
-\begin{tabular}[t]{l|l|l|l}
+\begin{tabular}[t]{l|rcr}
 \hline
-Characteristic & Beta & 95\% CI & p-value\\
+ & Beta & 95\% Conf. Interval & p-value\\
 \hline
 (Intercept) & 0.33 & 0.13, 0.52 & 0.002\\
-\hline
+%\hline
 New Alerts Proportion & 0.57 & 0.20, 0.95 & 0.004\\
 \hline
-\multicolumn{4}{l}{\textsuperscript{1} CI = Confidence Interval}\\
+%\multicolumn{4}{l}{\textsuperscript{1} CI = Confidence Interval}\\
 \end{tabular}
 \end{table}
 
-\normalsize
+In the next steps, we can refine the way we select the SATD comments. There are papers that use more sophisticated schemes to identify them, using Natural Language Processing, for instance. Following these steps maybe we will be able to get more certainty about the relation between alerts and SATD comments. Maybe we will be able to explain a greater part of the variability in the proportion of new SATD comments.
 
-In the next steps, we can refine the way we select the SATD comments.
-There are papers that use more sofisticated schemes to identify them,
-using Natural Language Processing, for instance. Following these steps
-maybe we will be able to get more certainty about the relation between
-alerts and SATD comments. Maybe we will be able to explain a greater
-part of the variability in the proportion of new SATD comments.
+%
+% MARCIO: que papers são estes? Tem referências?
+%
 
-\section{Appendix: expressions to find SATDs}\label{sec_SATDs}
 
-List of regular expressions used to find SATDs:
+% =========================================================
+%
+% PMD SOURCE CODE ANALYZER
+%
+% =========================================================
+
+\section*{Appendix: regular expressions used to find SATDs}
+\label{sec_SATDs}
 
 \small
-
-\begin{longtable}{r|l}
-\hline
-\# & Expression\\
-\hline
-\endfirsthead
-\multicolumn{2}{@{}l}{\textit{(continued)}}\\
-\hline
-\# & Expression\\
-\hline
-\endhead
-1 & (:?doesn't|does not) take into account\\
-\hline
-2 & (:?don't|do not) understand\\
-\hline
-3 & (:?it|this) (?:is|seems) ?[[:alnum:][:space:]]* a part implementation\\
-\hline
-4 & (:?it|this) (?:is|seems) ambiguous\\
-\hline
-5 & (:?it|this) ?[[:alnum:][:space:]]* should be\\
-\hline
-6 & (:?it|this) ?[[:alnum:][:space:]]* should not\\
-\hline
-7 & (:?it|this) ?[[:alnum:][:space:]]* shouldn't\\
-\hline
-8 & (:?it|this) is never executed\\
-\hline
-9 & (:?it|this) is planned to refactor\\
-\hline
-10 & (:?it|this) should ?[[:alnum:][:space:]]* be ?[[:alnum:][:space:]]* the other way round\\
-\hline
-11 & (:?it|this) should ?[[:alnum:][:space:]]* be extended\\
-\hline
-12 & (:?it|this) should ?[[:alnum:][:space:]]* be using\\
-\hline
-13 & (:?this|the|it) ?[[:alnum:][:space:]]* contains a ?[[:alnum:][:space:]]* error\\
-\hline
-14 & (?:the|it|this) ?[[:alnum:][:space:]]* only works\\
-\hline
-15 & (?:this|it) ?.* does not work\\
-\hline
-16 & (?:this|it)?[[:alnum:][:space:]]* is in the wrong place\\
-\hline
-17 & (?:todo:|needs-more-work:)[ ]*check\\
-\hline
-18 & (?:todo:|needs-more-work:)[ ]*complete this\\
-\hline
-19 & (?:todo:|needs-more-work:)[ ]*constraints\\
-\hline
-20 & (?:todo:|needs-more-work:)[ ]*document\\
-\hline
-21 & (?:todo:|needs-more-work:)[ ]*find a way to\\
-\hline
-22 & (?:todo:|needs-more-work:)[ ]*review\\
-\hline
-23 & (?:todo:|needs-more-work:)[ ]*verify\\
-\hline
-24 & (?:todo:|needs-more-work:)[ ]*what\textbackslash{}?\\
-\hline
-25 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* algorithm\\
-\hline
-26 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* in some cases\\
-\hline
-27 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* incomplete\\
-\hline
-28 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* not ?[[:alnum:][:space:]]* completely\\
-\hline
-29 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* this does\\
-\hline
-30 & (?:todo|needs-more-work): ?[[:alnum:][:space:]]* unfinished\\
-\hline
-31 & (?:todo|needs-more-work):[ ]*add\\
-\hline
-32 & (?:todo|needs-more-work):[ ]*assumes\\
-\hline
-33 & (?:todo|needs-more-work):[ ]*constructors\\
-\hline
-34 & (?:todo|needs-more-work):[ ]*define\\
-\hline
-35 & (?:todo|needs-more-work):[ ]*disable\\
-\hline
-36 & (?:todo|needs-more-work):[ ]*fix\\
-\hline
-37 & (?:todo|needs-more-work):[ ]*handle\\
-\hline
-38 & (?:todo|needs-more-work):[ ]*improve\\
-\hline
-39 & (?:todo|needs-more-work):[ ]*make\\
-\hline
-40 & (?:todo|needs-more-work):[ ]*move\\
-\hline
-41 & (?:todo|needs-more-work):[ ]*not implemented\\
-\hline
-42 & (?:todo|needs-more-work):[ ]*provide\\
-\hline
-43 & (?:todo|needs-more-work):[ ]*remove\\
-\hline
-44 & (?:todo|needs-more-work):[ ]*replace\\
-\hline
-45 & (?:todo|needs-more-work):[ ]*should\\
-\hline
-46 & (?:todo|needs-more-work):[ ]*split\\
-\hline
-47 & (?:todo|needs-more-work):[ ]*this ?[[:alnum:][:space:]]* needs\\
-\hline
-48 & (?:todo|needs-more-work):[ ]*this ?[[:alnum:][:space:]]* should\\
-\hline
-49 & (?:todo|needs-more-work):[ ]*treat\\
-\hline
-50 & (?:todo|needs-more-work):[ ]*use\\
-\hline
-51 & (?:todo|needs-more-work):[ ]*we ?[[:alnum:][:space:]]* need\\
-\hline
-52 & (?:todo|needs-more-work):[ ]*what\textbackslash{}?\\
-\hline
-53 & (?:todo|needs-more-work):[ ]*why\\
-\hline
-54 & [do not|don't] ?[[:alnum:][:space:]]* understand the code\\
-\hline
-55 & \textbackslash{}:\textbackslash{}-\textbackslash{}(\\
-\hline
-56 & a ?[[:alnum:][:space:]]* better way of doing this would\\
-\hline
-57 & a better implementation would be\\
-\hline
-58 & abandon all hope\\
-\hline
-59 & always check for\\
-\hline
-60 & at a loss\\
-\hline
-61 & at the moment\\
-\hline
-62 & awkward\\
-\hline
-63 & bad smell\\
-\hline
-64 & bail out\\
-\hline
-65 & barf\\
-\hline
-66 & brute force\\
-\hline
-67 & buggy\\
-\hline
-68 & can we remove\\
-\hline
-69 & cause for issue\\
-\hline
-70 & causes issue\\
-\hline
-71 & causes? ?[[:alnum:][:space:]]* errors?\\
-\hline
-72 & certainly buggy\\
-\hline
-73 & check that this is correct\\
-\hline
-74 & crap\\
-\hline
-75 & crappy\\
-\hline
-76 & do not use this\\
-\hline
-77 & do we ?[[:alnum:][:space:]]* need ?[[:alnum:][:space:]]* this\\
-\hline
-78 & does not handle\\
-\hline
-79 & does not work\\
-\hline
-80 & does this help\\
-\hline
-81 & don't think so\\
-\hline
-82 & don't use this\\
-\hline
-83 & double counted\\
-\hline
-84 & doubt that this would work\\
-\hline
-85 & dummy implementation\\
-\hline
-86 & enhance so that\\
-\hline
-87 & explain that this ?[[:alnum:][:space:]]* works also\\
-\hline
-88 & fix this\\
-\hline
-89 & fix this crap\\
-\hline
-90 & fixme\\
-\hline
-91 & for a next refactoring\\
-\hline
-92 & fragile\\
-\hline
-93 & get rid of this\\
-\hline
-94 & give up and go away\\
-\hline
-95 & good enough\\
-\hline
-96 & hack\\
-\hline
-97 & hacky\\
-\hline
-98 & hang our heads in shame\\
-\hline
-99 & hardcoded\\
-\hline
-100 & hardwired\\
-\hline
-101 & hope everything will work\\
-\hline
-102 & hopefully\\
-\hline
-103 & horrible\\
-\hline
-104 & how can this possibly be\\
-\hline
-105 & how come this happens\\
-\hline
-106 & how to avoid\\
-\hline
-107 & i'd suggest that\\
-\hline
-108 & i [do not|don't] know\\
-\hline
-109 & i [do not|don't] see ?[[:alnum:][:space:]]* reason for\\
-\hline
-110 & i don't know\\
-\hline
-111 & in the future\\
-\hline
-112 & inconsistency\\
-\hline
-113 & is (:?it|this) possible\\
-\hline
-114 & is (?:it|this|the) ?[[:alnum:][:space:]]* still useful\\
-\hline
-115 & is (?:this|it) ?[[:alnum:][:space:]]* correct\\
-\hline
-116 & is ?[[:alnum:][:space:]]* the right thing here\\
-\hline
-117 & is done twice\\
-\hline
-118 & is it a bug\\
-\hline
-119 & is not so beautiful\\
-\hline
-120 & is problematic\\
-\hline
-121 & is this .*needed\\
-\hline
-122 & is this a good way ?[[:alnum:][:space:]]*\textbackslash{}?\\
-\hline
-123 & is this line really safe\\
-\hline
-124 & is this next line safe\\
-\hline
-125 & it does not work yet\\
-\hline
-126 & it doesn't work yet\\
-\hline
-127 & it is planned to refactor\\
-\hline
-128 & it is unclear to me\\
-\hline
-129 & it works,? but\\
-\hline
-130 & it would be ?[[:alnum:][:space:]]* more efficient to\\
-\hline
-131 & it would be better to\\
-\hline
-132 & just a guess\\
-\hline
-133 & just abandon it\\
-\hline
-134 & kaboom\\
-\hline
-135 & kludge\\
-\hline
-136 & less elegant ?[[:alnum:][:space:]]* that works\\
-\hline
-137 & magic numbers?\\
-\hline
-138 & make (?:it|this) configurable\\
-\hline
-139 & may cause problem\\
-\hline
-140 & nasty\\
-\hline
-141 & necessary\textbackslash{}?\\
-\hline
-142 & necessary\textbackslash{}?\\
-\hline
-143 & need to be changed\\
-\hline
-144 & need to be reviewed\\
-\hline
-145 & need to replace this\\
-\hline
-146 & needs to be ?[[:alnum:][:space:]]* after stable release\\
-\hline
-147 & needs to be fixed\\
-\hline
-148 & needs to be tidied up\\
-\hline
-149 & needs to be updated\\
-\hline
-150 & needs to be updated\\
-\hline
-151 & never get executed\\
-\hline
-152 & no point in doing this\\
-\hline
-153 & not exact, but close\\
-\hline
-154 & not strictly correct\\
-\hline
-155 & not sure ?[[:alnum:][:space:]]* (?:this|it) belongs here\\
-\hline
-156 & not sure this is ?[[:alnum:][:space:]]* right\\
-\hline
-157 & not sure whether this belongs here\\
-\hline
-158 & not the right location\\
-\hline
-159 & nuke\\
-\hline
-160 & once we go ?[[:alnum:][:space:]]* we won't need this\\
-\hline
-161 & ouch\\
-\hline
-162 & pending\\
-\hline
-163 & please explain this\\
-\hline
-164 & potential ?[[:alnum:][:space:]]* issue\\
-\hline
-165 & probably a bug\\
-\hline
-166 & problematic\\
-\hline
-167 & prolly a bug\\
-\hline
-168 & prove that this works\\
-\hline
-169 & purists would\\
-\hline
-170 & really should be\\
-\hline
-171 & really should be\\
-\hline
-172 & remove me before production\\
-\hline
-173 & remove one of them\\
-\hline
-174 & remove this before production\\
-\hline
-175 & remove this code\\
-\hline
-176 & replace by ?[[:alnum:][:space:]]* elegant\\
-\hline
-177 & retarded\\
-\hline
-178 & risk of this blowing up\\
-\hline
-179 & shall not be\\
-\hline
-180 & shame\\
-\hline
-181 & should match ?[[:alnum:][:space:]]* uml\\
-\hline
-182 & should not be using ?[[:alnum:][:space:]]* here\\
-\hline
-183 & should there really be ?[[:alnum:][:space:]]* \textbackslash{}?\\
-\hline
-184 & shouldn't we ?[[:alnum:][:space:]]* do something ?[[:alnum:][:space:]]* here\\
-\hline
-185 & silly\\
-\hline
-186 & some fatal error\\
-\hline
-187 & something ?[[:alnum:][:space:]]* gone wrong\\
-\hline
-188 & something bad happened\\
-\hline
-189 & something bad is going on\\
-\hline
-190 & something serious is wrong\\
-\hline
-191 & strange construction\\
-\hline
-192 & stupid\\
-\hline
-193 & temporary crutch\\
-\hline
-194 & temporary fix\\
-\hline
-195 & temporary solution\\
-\hline
-196 & test this\\
-\hline
-197 & that's for a next refactoring\\
-\hline
-198 & the ?[[:alnum:][:space:]]* (?:is|seems) redundant\\
-\hline
-199 & there ?[[:alnum:][:space:]]* must be a check\\
-\hline
-200 & there ?[[:alnum:][:space:]]* ought to be a check\\
-\hline
-201 & there is a problem\\
-\hline
-202 & this (?:is|seems) ?[[:alnum:][:space:]]* expensive way to\\
-\hline
-203 & this (?:is|seems) a temporary method\\
-\hline
-204 & this ?[[:alnum:][:space:]]* (?:is|seems) ?[[:alnum:][:space:]]* redundant\\
-\hline
-205 & this can be a mess\\
-\hline
-206 & this creates a dependency\\
-\hline
-207 & this does exactly the same\\
-\hline
-208 & this does not look right\\
-\hline
-209 & this doesn't look right\\
-\hline
-210 & this error needs to be\\
-\hline
-211 & this indicates a ?[[:alnum:][:space:]]* problem\\
-\hline
-212 & this is already defined\\
-\hline
-213 & this is bs\\
-\hline
-214 & this is temporary and will go away\\
-\hline
-215 & this is uncool\\
-\hline
-216 & this is wrong\\
-\hline
-217 & this isn't quite right\\
-\hline
-218 & this isn't very solid\\
-\hline
-219 & this needs work\\
-\hline
-220 & this should use ?[[:alnum:][:space:]]* instead of\\
-\hline
-221 & this will ?[[:alnum:][:space:]]* not be perfect\\
-\hline
-222 & this will fail\\
-\hline
-223 & too primitive\\
-\hline
-224 & toss it\\
-\hline
-225 & treat .*as a soft error\\
-\hline
-226 & trial and error\\
-\hline
-227 & turn off after built\\
-\hline
-228 & ugly\\
-\hline
-229 & unknown why we ever experience this\\
-\hline
-230 & untested\\
-\hline
-231 & until code is reviewed\\
-\hline
-232 & unused?\\
-\hline
-233 & wasteful\\
-\hline
-234 & we ?[[:alnum:][:space:]]* (?:don't|do not) need (?:it|this) any more\\
-\hline
-235 & we ?[[:alnum:][:space:]]* do not want\\
-\hline
-236 & we ?[[:alnum:][:space:]]* don't want\\
-\hline
-237 & we can remove\\
-\hline
-238 & we need a better\\
-\hline
-239 & we presume\\
-\hline
-240 & we should not need this\\
-\hline
-241 & we shouldn't need this\\
-\hline
-242 & what (?:shall|should) we do here\\
-\hline
-243 & what do we want to use .*\textbackslash{}?\\
-\hline
-244 & what if we need to .*\textbackslash{}?\\
-\hline
-245 & what is this trying to do\textbackslash{}?\\
-\hline
-246 & why (?:is|are) ?[[:alnum:][:space:]]* being ignored\\
-\hline
-247 & why ?[[:alnum:][:space:]]* continue here as if nothing has gone wrong\textbackslash{}?\\
-\hline
-248 & why aren't we ?[[:alnum:][:space:]]* \textbackslash{}?\\
-\hline
-249 & why is this code commented\\
-\hline
-250 & why isn't this done\\
-\hline
-251 & why there is not test\\
-\hline
-252 & workaround\\
-\hline
-253 & workaround for bug\\
-\hline
-254 & would be better here\\
-\hline
-255 & you can be unhappy now\\
-\hline
-256 & yuck\\
-\hline
-\end{longtable}
-
+\input{regex-sadt.tex}
 \normalsize
 
-\section{References}
+
+% =========================================================
+%
+% PMD SOURCE CODE ANALYZER
+%
+% =========================================================
+
+\section*{References}
 
 \hypertarget{refs}{}
 \begin{cslreferences}
